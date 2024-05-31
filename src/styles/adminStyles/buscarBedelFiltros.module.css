@@ -1,0 +1,60 @@
+:root {
+    --input-height: 40px;
+}
+
+.buscar_bedel_input_container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.buscar_bedel_input_section {
+    margin-top:40px;
+    width: 250px;
+    height: auto;
+}
+
+.buscar_bedel_input_section input[type="submit"] {
+    margin-top:30px;
+}
+
+.input_section_descriptor {
+    font-size: 20px;
+}
+
+.buscar_bedel_input_section input, select {
+    width: 80%;
+    height: var(--input-height);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 4px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.buscar_bedel_input_section button {
+    width: 30%;
+    height: var(--input-height);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 4px;
+    margin: 8px 0;
+    margin-top:30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.buscar_bedel_input_section button:hover {
+    background-color: #d8d8d8;
+    cursor: pointer;
+}
+.buscar_bedel_input_section input[type="submit"]:hover {
+    background-color: #d8d8d8;
+    cursor: pointer;
+}

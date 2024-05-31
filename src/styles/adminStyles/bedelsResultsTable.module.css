@@ -1,0 +1,57 @@
+
+.buscar_bedel_results_container {
+    width: 100%;
+    margin-top:35px;
+}
+.table_container{
+    overflow: hidden;
+    overflow-y: auto;
+    height: 60vh;
+}
+
+table {
+    width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+td, th {
+    width: 20%;
+    height: 30px;
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    background-color: rgb(171, 171, 171);
+    top: 0;
+    z-index: 2;
+    position: sticky;
+}
+
+tr:nth-child(even) {
+    background-color: #EEEEEE;
+}
+
+h2 {
+    margin-bottom: 4px;
+}
+
+table button.editar_btn, table button.eliminar_btn { 
+    width: 40%;
+    background: none; 
+    border: none; 
+    margin:auto;
+    font-size: medium;
+    cursor: pointer;
+}
+
+table button.editar_btn {
+    color: rgb(202, 186, 0);
+}
+
+table button.eliminar_btn {
+    color: rgb(230, 94, 94)
+}

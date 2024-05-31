@@ -1,0 +1,12 @@
+:root {
+    --white: #EEEEEE;
+    --grey: #c5c5c5;
+    --blue: #16cce0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
