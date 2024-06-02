@@ -12,7 +12,7 @@ function BuscarBedelContent() {
   return (
     
     <div className={styles.buscar_bedel_container}>
-      <BuscarBedelFiltros apellido={apellido} setApellido={setApellido} turno={turno} setTurno={setTurno}/>
+      <BuscarBedelFiltros setApellido={setApellido} setTurno={setTurno}/>
       <BedelResultsTable apellidoFilter={apellido} turnoFilter={turno}/>
     </div>
     
