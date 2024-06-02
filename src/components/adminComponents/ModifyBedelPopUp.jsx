@@ -1,4 +1,5 @@
 import { useState } from "react";
+import validatePassword from "../../services/passwordValidation"
 
 import styles from "../../styles/adminStyles/modifyBedelPopUp.module.css"
 
@@ -23,7 +24,12 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
     }
 
     const tryModification = () => {
-        //validate password
+        const validation = validatePassword(contraseña, contraseñaConfirmacion)
+        if(!validation.isValid) {
+            //show error popup
+            console.log(validation.error)
+            return
+        }
         confirmModification(packModifiedData())
     }
 
