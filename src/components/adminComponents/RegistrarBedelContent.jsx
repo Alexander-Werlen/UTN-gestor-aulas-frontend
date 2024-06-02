@@ -1,4 +1,5 @@
 import { useState } from "react"
+import validatePassword from "../../services/passwordValidation"
 
 import styles from "../../styles/adminStyles/registrarBedelContent.module.css"
 
@@ -30,34 +31,6 @@ function RegistrarBedelContent() {
     setContraseñaConfirmacion("")
   }
 
-  const validatePassword = (psw, pswConfirmation) => {
-
-    if(psw!=pswConfirmation) return {
-      isValid: false,
-      error: "bad confirmation"
-    }
-    if(!(/\d/.test(psw))) return {
-      isValid: false,
-      error: "lacks digit"
-    }
-    if(!(/[A-Z]/.test(psw))) return {
-      isValid: false,
-      error: "lacks uppercase"
-    }
-    if(!(/[@#$%&*]/.test(psw))) return {
-      isValid: false,
-      error: "lacks special char"
-    }
-    if(psw.length < 8) return {
-      isValid: false,
-      error: "not enough chars"
-    }
-    return {
-      isValid: true,
-      error: null
-    }
-
-  }
 
   const tryRegistration = () => {
       const validation = validatePassword(contraseña, contraseñaConfirmacion)
