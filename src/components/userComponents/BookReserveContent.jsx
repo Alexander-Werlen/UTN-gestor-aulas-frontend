@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import styles from "../../styles/userStyles/bookReserveContent.module.css"
 import InformationInputSection from "./InformationInputSection"
+import DayInputSection from "./DayInputSection"
 
 function BookReserveContent() {
 
@@ -16,15 +17,18 @@ function BookReserveContent() {
     }
     
     const [information, setInformation] = useState(defaultInformation)
+    const [daysReserved, setDaysReserved] = useState([])
+
+    const resetInformation = () => setInformation(defaultInformation)
 
     return (
 
-    <div className={styles.container}>
-        <InformationInputSection information={information} setInformation={setInformation}/>
-        <div>
-        DayInputSection
+        <div className={styles.container}>
+            <form>
+                <InformationInputSection information={information} setInformation={setInformation} resetInputs={resetInformation}/>
+                <DayInputSection daysReserved={daysReserved} setDaysReserved={setDaysReserved} information={information}/>
+            </form>
         </div>
-    </div>
 
     )
 }

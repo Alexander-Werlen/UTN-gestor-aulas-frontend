@@ -33,13 +33,13 @@ option[value=""][disabled] {
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 4px;
-    margin: 8px 0;
-    margin-top:30px;
+    margin-top: 22px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .input_section_descriptor {
