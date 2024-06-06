@@ -24,11 +24,13 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
     }
 
     const tryModification = () => {
-        const validation = validatePassword(contraseña, contraseñaConfirmacion)
-        if(!validation.isValid) {
-            //show error popup
-            console.log(validation.error)
-            return
+        if(contraseña || contraseñaConfirmacion){
+            const validation = validatePassword(contraseña, contraseñaConfirmacion)
+            if(!validation.isValid) {
+                //show error popup
+                console.log(validation.error)
+                return
+            }
         }
         confirmModification(packModifiedData())
     }
@@ -59,10 +61,10 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
                     <h4>Confirmar nueva contraseña</h4>
                     <input type="password" value={contraseñaConfirmacion} placeholder="Sin modificar" onChange={(e)=>setContraseñaConfirmacion(e.target.value)}></input>
                     <div className={styles.warning_msg}>
-                        <p>condition1</p>
-                        <p>condition1</p>
-                        <p>condition1</p>
-                        <p>condition1</p>
+                        <p>La contraseña debe contener al menos un dígito.</p>
+                        <p>Debe contener al menos una letra mayúscula</p>
+                        <p>Debe contener signos especiales (@#$%&*)</p>
+                        <p>Debe tener por lo menos 8 caracteres</p>
                     </div>
                 </div>
                 <div className={styles.btn_section_container}>

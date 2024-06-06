@@ -33,6 +33,10 @@
     margin-top: 0px;
 }
 
+option[value=""][disabled] {
+    display: none;
+}
+
 .content_container h4 {
     margin-top: 8px;
 }

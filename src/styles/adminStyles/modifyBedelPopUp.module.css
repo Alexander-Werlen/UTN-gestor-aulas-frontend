@@ -79,7 +79,8 @@
 }
 
 .warning_msg p{
-    margin-top: 10px;
+    margin-top: 8px;
+    font-size: small;
 }
 
 .btn_section_container {
