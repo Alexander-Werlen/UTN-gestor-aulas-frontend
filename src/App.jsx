@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/admin/*" element={<AdminPage />} />
-        <Route path="/user" element={<UserPage />} />
+        <Route path="/user/*" element={<UserPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
