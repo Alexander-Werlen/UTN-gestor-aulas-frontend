@@ -7,10 +7,10 @@ table {
 
 td, th {
     width: 20%;
-    height: 30px;
+    height: 40px;
     border: 1px solid #000000;
     text-align: center;
-    padding: 8px;
+    padding: 0px;
 }
 
 th {
@@ -23,3 +23,77 @@ th {
 tr:nth-child(even) {
     background-color: #EEEEEE;
 }
+
+table select {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    text-align: center;
+    padding: 0;
+    text-indent: 1px;
+    text-overflow: '';
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+    appearance: select;
+}
+
+table select::-ms-expand {
+    display: none;
+}
+
+.last_row_container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.delete_day_btn_container{
+    position: absolute;
+    height: 100%;
+    width: 50px;
+    right: 0;
+    z-index: 3;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: red;
+    font-size: large;
+}
+
+
+.add_btn {
+    width: 100%;
+    height: 40px;
+    background-color: rgb(187, 235, 186);
+    font-size: small;
+    cursor: pointer;
+    transition: background-color 100ms;
+}
+
+.add_btn:hover {
+    background-color: rgb(157, 220, 157);
+}
+
+.sumbit_btn {
+    margin-top: 30px;
+    height: 40px;
+    width: 250px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #16cce0;
+    transition: background-color 100ms;
+}
+
+.sumbit_btn:hover {
+    background-color: #14b4c6;
+}
+
