@@ -1,10 +1,10 @@
 .nav_bar {
-    width: 70%;
+    width: max(70%, 1300px);
     height: 100%;
     margin: auto;
     display: flex;
     overflow: hidden;
-
+    background-color: var(--white);
 }
 
 .nav_bar_section {

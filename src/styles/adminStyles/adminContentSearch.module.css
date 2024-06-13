@@ -1,7 +1,7 @@
 
 .buscar_bedel_container {
     height: 100%;
-    width: 70%;
+    width: max(70%, 1300px);
     margin: auto;
     overflow-y: auto;
 }

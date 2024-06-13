@@ -1,5 +1,5 @@
 .register_container {
-    width: 20%;
+    width: max(20%, 400px);
     margin: auto;
     overflow-y: auto;
 }
