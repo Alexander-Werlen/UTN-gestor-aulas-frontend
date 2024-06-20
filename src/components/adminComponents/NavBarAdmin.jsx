@@ -5,7 +5,9 @@ import styles from "../../styles/adminStyles/navBar.module.css"
 
 function NavBarAdmin() {
 
-  const [sectionSelected, setSectionSelected] = useState("search")
+  const currentPath = window.location.pathname.split('/')
+  const actionPath = currentPath[currentPath.length-1]
+  const [sectionSelected, setSectionSelected] = useState(actionPath)
 
   return (
     

@@ -5,8 +5,10 @@ import styles from "../../styles/userStyles/navBar.module.css"
 
 function NavBarUser() {
 
-  const [sectionSelected, setSectionSelected] = useState("book")
-
+  const currentPath = window.location.pathname.split('/')
+  const actionPath = currentPath[currentPath.length-1]
+  const [sectionSelected, setSectionSelected] = useState(actionPath)
+  
   return (
     
     <div className={styles.nav_bar}>
