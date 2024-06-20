@@ -5,12 +5,12 @@ import BookReserveContent from "../components/userComponents/BookReserveContent"
 
 import styles from "../styles/userStyles/userPage.module.css"
 
-function UserPage() {
+function UserPage({sectionSelected}) {
 
     return (
       <div className= {styles.user_page_container}>
         <div className= {styles.nav_bar_container}>
-          <NavBarUser/>
+          <NavBarUser sectionSelected={sectionSelected}/>
         </div>
         <div className={styles.content_container}>
         <Routes>

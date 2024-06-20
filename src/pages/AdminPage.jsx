@@ -6,12 +6,12 @@ import RegistrarBedelContent from "../components/adminComponents/RegistrarBedelC
 
 import styles from "../styles/adminStyles/adminPage.module.css"
 
-function AdminPage() {
+function AdminPage({sectionSelected}) {
 
     return (
       <div className= {styles.admin_page_container}>
         <div className= {styles.nav_bar_container}>
-          <NavBarAdmin />
+          <NavBarAdmin sectionSelected={sectionSelected}/>
         </div>
         <div className={styles.bedel_content_container}>
         <Routes>

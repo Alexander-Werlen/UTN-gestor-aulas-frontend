@@ -1,25 +1,20 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 import styles from "../../styles/adminStyles/navBar.module.css"
 
-function NavBarAdmin() {
-
-  const currentPath = window.location.pathname.split('/')
-  const actionPath = currentPath[currentPath.length-1]
-  const [sectionSelected, setSectionSelected] = useState(actionPath)
+function NavBarAdmin({sectionSelected}) {
 
   return (
     
     <div className={styles.nav_bar}>
-      <Link to="/admin/bedel/search" className={`${styles.nav_bar_section} ${(sectionSelected=="search" ? styles.active : '')}`} onClick={()=>setSectionSelected("search")}>
+      <Link to="/admin/bedel/search" className={`${styles.nav_bar_section} ${(sectionSelected=="search" ? styles.active : '')}`}>
         <p className={styles.nav_section_text}>
         BUSCAR
         <br/> 
         BEDEL
         </p>
       </Link>
-      <Link to="/admin/bedel/register"className={`${styles.nav_bar_section} ${(sectionSelected=="register" ? styles.active : '')}`} onClick={()=>setSectionSelected("register")}>
+      <Link to="/admin/bedel/register"className={`${styles.nav_bar_section} ${(sectionSelected=="register" ? styles.active : '')}`}>
         <p className={styles.nav_section_text}>
         REGISTRAR
         <br/>
