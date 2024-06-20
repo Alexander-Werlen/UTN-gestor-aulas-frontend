@@ -19,21 +19,21 @@ function NavBarUser() {
         RESERVA
         </p>
       </Link>
-      <Link to="/user/"className={`${styles.nav_bar_section} ${(sectionSelected=="classroom" ? styles.active : '')}`} onClick={()=>setSectionSelected("classroom")}>
+      <Link to="/user/reserve/classroom"className={`${styles.nav_bar_section} ${(sectionSelected=="classroom" ? styles.active : '')}`} onClick={()=>setSectionSelected("classroom")}>
         <p className={styles.nav_section_text}>
         RESERVAS
         <br/>
         EN AULA
         </p>
       </Link>
-      <Link to="/user/"className={`${styles.nav_bar_section} ${(sectionSelected=="day" ? styles.active : '')}`} onClick={()=>setSectionSelected("day")}>
+      <Link to="/user/reserve/day"className={`${styles.nav_bar_section} ${(sectionSelected=="day" ? styles.active : '')}`} onClick={()=>setSectionSelected("day")}>
         <p className={styles.nav_section_text}>
         RESERVAS
         <br/>
         EN DÍA
         </p>
       </Link>
-      <Link to="/user/"className={`${styles.nav_bar_section} ${(sectionSelected=="class" ? styles.active : '')}`} onClick={()=>setSectionSelected("class")}>
+      <Link to="/user/reserve/subject"className={`${styles.nav_bar_section} ${(sectionSelected=="class" ? styles.active : '')}`} onClick={()=>setSectionSelected("class")}>
         <p className={styles.nav_section_text}>
         RESERVAS
         <br/>

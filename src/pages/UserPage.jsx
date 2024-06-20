@@ -15,6 +15,9 @@ function UserPage() {
         <div className={styles.content_container}>
         <Routes>
           <Route path="/reserve/book" element={<BookReserveContent />} />
+          <Route path="/reserve/classroom" element={<>Reservas por aula</>} />
+          <Route path="/reserve/day" element={<>Reservas por dia</>} />
+          <Route path="/reserve/subject" element={<>Reservas por curso</>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         </div>
