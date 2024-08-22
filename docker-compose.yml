@@ -1,0 +1,53 @@
+#postgres
+services:
+  db:
+    image: postgres:14.2-alpine
+    container_name: demo-postgres-14.2
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: 
+      "postgres -c 'max_connections=500'"
+    environment:
+      - POSTGRES_DB=gestor_aulas_production
+      - POSTGRES_USER=gestor_aulas
+      - POSTGRES_PASSWORD=gestor_aulas
+    ports:
+      - "5432:5432"
+    profiles: 
+      - front-dev
+      - prod
+  backend:
+    image: style12341/gestor-aulas:latest
+    command: "./bin/rails server"
+    environment:
+      - RAILS_ENV=production
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=gestor_aulas_production
+      - POSTGRES_USER=gestor_aulas
+      - POSTGRES_PASSWORD=gestor_aulas
+      - RAILS_MASTER_KEY=6c53890cb69d92ec334e7dd38cfb7647
+      - DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+    volumes:
+      - app-storage:/rails/storage
+      - ./public/files:/rails/public/files
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    profiles: 
+      - front-dev
+      - prod
+  frontend:
+    image: style12341/gestor-aulas-front:latest
+    command: "npm run dev"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000
+    ports:
+      - "8080:8080"
+    profiles:
+      - back-dev
+      - prod
+
+volumes:
+  postgres_data: {}
+  app-storage: {}
