@@ -16,7 +16,8 @@ npm install
 
 Iniciar instancia en desarrollo
 ```
-# Si se tiene docker instalado, para correr el backend:
+# Si se tiene docker instalado, para correr el backend ante cualquier cambio:
+docker compose --profile prod pull
 docker compose --profile front-dev up --remove-orphans 
 #
 npm run dev
