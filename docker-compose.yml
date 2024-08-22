@@ -29,7 +29,6 @@ services:
       - DISABLE_DATABASE_ENVIRONMENT_CHECK=1
     volumes:
       - app-storage:/rails/storage
-      - ./public/files:/rails/public/files
     depends_on:
       - db
     ports:
