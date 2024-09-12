@@ -1,5 +1,6 @@
 import { useState } from "react"
 import validatePassword from "../../services/passwordValidation"
+import axios from 'axios'
 
 import styles from "../../styles/adminStyles/registrarBedelContent.module.css"
 
@@ -17,8 +18,8 @@ function RegistrarBedelContent() {
           apellido: apellido,
           nombre: nombre,
           turno: turno,
-          contraseña: contraseña,
-          identificador: identificador
+          password: contraseña,
+          id: identificador
       }
   }
 
@@ -40,9 +41,19 @@ function RegistrarBedelContent() {
         return;
       }
       const bedelData = packInputData()
-      console.log(bedelData)
       resetInputs()
       //PUT API call
+      axios({
+        method: 'post',
+        url: `http://localhost:3000/bedeles`,
+        data: bedelData
+      }).then(response => {
+          //### Avisar exito
+          console.log(response)
+      }).catch(e => {
+          //### Avisar error
+          console.log(e)
+      })
       //handle API response
   }
 

@@ -5,14 +5,14 @@ import styles from "../../styles/adminStyles/buscarBedelFiltros.module.css"
 function BuscarBedelFiltros({setApellido, setTurno}) {
 
   const [apellidoHolder, setApellidoHolder] = useState("")
-  const [turnoHolder, setTurnoHolder] = useState("Todos")
+  const [turnoHolder, setTurnoHolder] = useState("todos")
   
   const resetInputs = (e) => {
     e.preventDefault()
     setApellido("")
     setApellidoHolder("")
-    setTurno("Todos")
-    setTurnoHolder("Todos")
+    setTurno("todos")
+    setTurnoHolder("todos")
   }
 
   const setFilters = (e) => {
@@ -34,10 +34,10 @@ function BuscarBedelFiltros({setApellido, setTurno}) {
         <div className={styles.buscar_bedel_input_section}>
           <div className={styles.input_section_descriptor}>Turno</div>
           <select value={turnoHolder} onChange={(e)=>setTurnoHolder(e.target.value)}>
-            <option value="Todos">Todos</option>
-            <option value="Mañana">Mañana</option>
-            <option value="Tarde">Tarde</option>
-            <option value="Noche">Noche</option>
+            <option value="todos">Todos</option>
+            <option value="mañana">Mañana</option>
+            <option value="tarde">Tarde</option>
+            <option value="noche">Noche</option>
           </select>
         </div>
         <div className={styles.buscar_bedel_input_section}>

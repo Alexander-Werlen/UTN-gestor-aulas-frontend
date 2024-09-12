@@ -7,7 +7,7 @@ import styles from "../../styles/adminStyles/adminContentSearch.module.css"
 function BuscarBedelContent() {
 
   const [apellido, setApellido] = useState("");
-  const [turno, setTurno] = useState("Todos");
+  const [turno, setTurno] = useState("todos");
 
   return (
     

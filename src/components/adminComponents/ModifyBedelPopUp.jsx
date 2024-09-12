@@ -52,9 +52,9 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
                     <input type="text" value={bedelData.identificador} disabled></input>
                     <h4>Turno</h4>
                     <select value={turno} onChange={(e)=>setTurno(e.target.value)}>
-                        <option value="Mañana">Mañana</option>
-                        <option value="Tarde">Tarde</option>
-                        <option value="Noche">Noche</option>
+                        <option value="mañana">Mañana</option>
+                        <option value="tarde">Tarde</option>
+                        <option value="noche">Noche</option>
                     </select>
                     <h4>Nueva contraseña</h4>
                     <input type="password" value={contraseña} placeholder="Sin modificar" onChange={(e)=>setContraseña(e.target.value)}></input>

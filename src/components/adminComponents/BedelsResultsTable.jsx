@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import DeleteBedelPopUp from "./DeleteBedelPopUp"
 import ModifyBedelPopUp from "./ModifyBedelPopUp"
+import axios from 'axios'
 
 import styles from "../../styles/adminStyles/bedelsResultsTable.module.css"
 
@@ -20,30 +21,61 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
     const [alterBedelData, setAlterBedelData] = useState(defaultAlterBedelData)
 
     useEffect(() => {
-        //simula llamada a api
-        setTimeout(() => {
-            let aux = []
-            for(let i = 0; i < 30; i++) {
-                aux.push({
-                    apellido: "Werlen",
-                    nombre: "Alexander",
-                    turno: "Tarde",
-                    identificador: "werlen-a-n"+i.toString()
-                })
-            }
-            setBedels(aux)
-        }, 50);
+        axios.get("http://localhost:3000/bedeles").then(response => {
+            return response.data
+        }).then(bedeles => {
+            let datosBedeles = bedeles.map(bedel => {
+                return {
+                    apellido: bedel.apellido,
+                    nombre: bedel.nombre,
+                    turno: bedel.turno,
+                    identificador: bedel.id
+                }
+            })
+            setBedels(datosBedeles)
+        }).catch(e => {
+            console.log(e)
+        })
     }, []);
 
 
     const confirmDeletion = (identificador) => {
         //###send API deletion 
+
+        axios({
+            method: 'delete',
+            url: `http://localhost:3000/bedeles/${identificador}`,
+        }).then(response => {
+            //### Avisar exito
+            console.log(response)
+        }).catch(e => {
+            //### Avisar error
+            console.log(e)
+        })
+
         setBedels(bedels.filter((bedel) => bedel.identificador!==identificador))
         closePopUp()
     }
 
     const confirmModification = (modifiedBedel) => {
         //### send API modification
+        axios({
+            method: 'put',
+            url: `http://localhost:3000/bedeles/${modifiedBedel.identificador}`,
+            data: {
+                apellido: modifiedBedel.apellido,
+                nombre: modifiedBedel.nombre,
+                turno: modifiedBedel.turno,
+                contraseña: modifiedBedel.contraseña
+            }
+        }).then(response => {
+            //### Avisar exito
+            console.log(response)
+        }).catch(e => {
+            //### Avisar error
+            console.log(e)
+        })
+
         const newList = bedels.map((bedel) => {
             if(bedel.identificador==modifiedBedel.identificador) {
                 return {
@@ -93,7 +125,7 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
         })
     }
 
-    const filteredBedels = bedels.filter((bedel) => (apellidoFilter=="" || bedel.apellido.toLowerCase()==apellidoFilter.toLowerCase()) && (turnoFilter=="Todos" || bedel.turno==turnoFilter))
+    const filteredBedels = bedels.filter((bedel) => (apellidoFilter=="" || bedel.apellido.toLowerCase()==apellidoFilter.toLowerCase()) && (turnoFilter=="todos" || bedel.turno==turnoFilter))
 
     return (
         <>
