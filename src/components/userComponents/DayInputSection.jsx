@@ -3,6 +3,12 @@ import styles from "../../styles/userStyles/dayInputSection.module.css"
 
 function DayInputSection({daysReserved, setDaysReserved, information}) {
 
+    const allDaysEnum = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
+    const daysEnum = allDaysEnum.filter(d => {
+        if(daysReserved.map(d => d.day).includes(d)) return false
+        else return true
+    })
+
     if(!information.tipo_reserva) {
         return (
             <div>
@@ -24,6 +30,7 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
         let newDays = daysReserved.slice()
         newDays.splice(idxToDelete,1)
         setDaysReserved(newDays)
+        //falta actualizar daysUsed
     }
 
     const addDay = (e) => {
@@ -34,8 +41,6 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
             duration: ""
         }))
     }
-
-    const daysEnum = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
 
     const startEnum = [];
     for (let i=8; i < 23; i++) {
@@ -66,33 +71,40 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
                 </thead>
                 <tbody>
                 {daysReserved.map((dayReserved, idx)=>
+                    
                     <tr key={idx}>
                         <td>
-                            <select value={dayReserved.day} onChange={(e)=>{updateDay(idx, {...dayReserved, day: e.target.value})}}>
-                            {daysEnum.map((dayOfTheWeek) => <option key={dayOfTheWeek} value={dayOfTheWeek}>{dayOfTheWeek}</option>)}
+                            <select required value={dayReserved.day} onChange={(e)=>updateDay(idx, {...dayReserved, day: e.target.value})}>
                             <option value="" disabled>Seleccionar</option>
+                            {dayReserved.day &&
+                            daysEnum.concat(dayReserved.day).map((dayOfTheWeek) => <option key={dayOfTheWeek} value={dayOfTheWeek}>{dayOfTheWeek}</option>)
+                            }
+                            {!dayReserved.day &&
+                            daysEnum.map((dayOfTheWeek) => <option key={dayOfTheWeek} value={dayOfTheWeek}>{dayOfTheWeek}</option>)
+                            }
                             </select>
                         </td>
                         <td>
-                            <select value={dayReserved.start} onChange={(e)=>updateDay(idx, {...dayReserved, start: e.target.value})}>
-                            {startEnum.map((start) => <option key={start} value={start}>{start}</option>)}
+                            <select required value={dayReserved.start} onChange={(e)=>updateDay(idx, {...dayReserved, start: e.target.value})}>
                             <option value="" disabled>Seleccionar</option>
+                            {startEnum.map((start) => <option key={start} value={start}>{start}</option>)}
                             </select>
                         </td>
                         <td>
                             <div className={styles.last_row_container}>
-                            <select value={dayReserved.duration} onChange={(e)=>updateDay(idx, {...dayReserved, duration: e.target.value})}>
-                            {durationEnum.map((duration) => <option key={duration} value={duration}>{duration}</option>)}
+                            <select required value={dayReserved.duration} onChange={(e)=>updateDay(idx, {...dayReserved, duration: e.target.value})}>
                             <option value="" disabled>Seleccionar</option>
+                            {durationEnum.map((duration) => <option key={duration} value={duration}>{duration}</option>)}
                             </select>
-                            <button className={styles.delete_day_btn_container} onClick={(e)=>deleteDay(e, idx)}>&#10006;</button>
+                            <button className={styles.delete_day_btn_container} onClick={(e)=>deleteDay(e, idx)} hidden={daysReserved.length == 1}>&#10006;</button>
                             </div>
                         </td>
                     </tr>
+                    
                 )}
                 </tbody>
             </table>
-            <button className={styles.add_btn} onClick={(e) => addDay(e)}>AGREGAR DÍA</button>
+            <button className={styles.add_btn} onClick={(e) => addDay(e)} disabled={daysReserved.length == 7}>AGREGAR DÍA</button>
             <input type="submit" value="SELECCIONAR AULAS" className={styles.sumbit_btn}></input>
         </div>
         </div>
