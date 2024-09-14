@@ -1,4 +1,4 @@
-hr {
+.separator_thick{
     border: none;
     height: 4px;
     /* Set the hr color */
@@ -7,7 +7,7 @@ hr {
     margin-bottom: 8px;
 }
 
-table .table_container{
+.table{
     margin-top: 5px;
     margin-bottom: 20px;
     width: 100%;
@@ -16,7 +16,7 @@ table .table_container{
     border-spacing: 0;
 }
 
-td, th {
+.table td, .table th {
     width: 20%;
     height: 40px;
     border: 1px solid #000000;
@@ -24,18 +24,18 @@ td, th {
     padding: 0px;
 }
 
-th {
+.table th {
     background-color: rgb(171, 171, 171);
     top: 0;
     z-index: 2;
     position: sticky;
 }
 
-tr:nth-child(even) {
+.table tr:nth-child(even) {
     background-color: #EEEEEE;
 }
 
-ul {
+.table ul {
     list-style-position: inside;
 }
 
@@ -75,4 +75,16 @@ ul {
 
 .cancel_btn:hover {
     background-color: #989898;
+}
+
+.btn_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+  
+.flex_column {
+display: flex;
+flex-direction: column;
 }

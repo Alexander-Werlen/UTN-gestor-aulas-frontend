@@ -130,9 +130,9 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
     return (
         <>
         <div className={styles.buscar_bedel_results_container}>
-        <h2>Resultados</h2>
+        <h2 className={styles.h2}>Resultados</h2>
         <div className={styles.table_container}>
-            <table>
+            <table className={styles.table}>
                 <thead>
                     <tr>
                         <th>ACCIONES</th>

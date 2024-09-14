@@ -64,7 +64,7 @@ function RegistrarBedelContent() {
       
     <div className={styles.register_container}>
         <form onSubmit={(e) => tryRegistration(e)}>
-        <div className={styles.input_section_container}>
+        <div>
             <div className={styles.header_container}>
             <h2>REGISTRAR BEDEL</h2>
             </div>
@@ -75,7 +75,7 @@ function RegistrarBedelContent() {
             <h4>Identificador</h4>
             <input type="text" required value={identificador} onChange={(e)=>setIdentificador(e.target.value)}></input>
             <h4>Turno</h4>
-            <select value={turno} required onChange={(e)=>setTurno(e.target.value)}>
+            <select value={turno} required onChange={(e)=>setTurno(e.target.value)} className={styles.hide_disabled_option}>
               <option value="" disabled>Seleccionar</option>
               <option value="Mañana">Mañana</option>
               <option value="Tarde">Tarde</option>

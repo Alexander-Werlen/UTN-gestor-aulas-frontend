@@ -59,9 +59,9 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
 
     return (
         <div>
-            <h2>RESERVAS</h2>
+            <h2 className={styles.day_input_h2}>RESERVAS</h2>
             <div>
-            <table className={styles.table_container}>
+            <table className={styles.table}>
                 <thead>
                     <tr>
                         <th>DÍA</th>
@@ -74,7 +74,7 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
                     <tr key={idx}>
                         <td className={styles.dayInputCell}>
                             <select required value={dayReserved.day} onChange={(e)=>updateDay(idx, {...dayReserved, day: e.target.value})}>
-                            <option value="" disabled>Seleccionar</option>
+                            <option value="" hidden disabled>Seleccionar</option>
                             {dayReserved.day &&
                             daysEnum.concat(dayReserved.day).map((dayOfTheWeek) => <option key={dayOfTheWeek} value={dayOfTheWeek}>{dayOfTheWeek}</option>)
                             }
@@ -85,14 +85,14 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
                         </td>
                         <td className={styles.dayInputCell}>
                             <select required value={dayReserved.start} onChange={(e)=>updateDay(idx, {...dayReserved, start: e.target.value})}>
-                            <option value="" disabled>Seleccionar</option>
+                            <option value="" hidden disabled>Seleccionar</option>
                             {startEnum.map((start) => <option key={start} value={start}>{start}</option>)}
                             </select>
                         </td>
                         <td className={styles.dayInputCell}>
                             <div className={styles.last_row_container}>
                             <select required value={dayReserved.duration} onChange={(e)=>updateDay(idx, {...dayReserved, duration: e.target.value})}>
-                            <option value="" disabled>Seleccionar</option>
+                            <option value="" hidden disabled>Seleccionar</option>
                             {durationEnum.map((duration) => <option key={duration} value={duration}>{duration}</option>)}
                             </select>
                             <button className={styles.delete_day_btn_container} onClick={(e)=>deleteDay(e, idx)} hidden={daysReserved.length == 1}>&#10006;</button>

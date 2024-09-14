@@ -33,7 +33,7 @@
     margin-top: 0px;
 }
 
-option[value=""][disabled] {
+.hide_disabled_option option[value=""][disabled] {
     display: none;
 }
 

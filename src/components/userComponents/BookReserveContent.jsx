@@ -28,6 +28,7 @@ function BookReserveContent() {
     
     const resetInformation = () => setInformation(defaultInformation)
 
+
     const handleSumbit = (e) => {
         e.preventDefault()
 
@@ -56,7 +57,6 @@ function BookReserveContent() {
             //continue with reservation
             setAulasDisponiblesPorDia(res.data)
             setIsChoosingAulas(true)
-            console.log(res)    
         }).catch(e => {
             console.log(e)
         })
@@ -72,7 +72,7 @@ function BookReserveContent() {
                 <DayInputSection daysReserved={daysReserved} setDaysReserved={setDaysReserved} information={information}/>
             </form>
             }{isChoosingAulas &&
-                <ChoosingClassRooms aulasDisponiblesPorDia={aulasDisponiblesPorDia} tipoReserva={information.tipo_reserva} daysReserved={daysReserved} setDaysReserved={setDaysReserved}/>
+                <ChoosingClassRooms aulasDisponiblesPorDia={aulasDisponiblesPorDia} information={information} daysReserved={daysReserved} setDaysReserved={setDaysReserved} setIsChoosingAulas={setIsChoosingAulas}/>
             }
         </div>
 

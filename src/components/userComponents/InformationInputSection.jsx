@@ -46,11 +46,11 @@ function InformationInputSection({information, setInformation, resetInputs}) {
   return (
     
     <div>
-      <h2>INFORMACIÓN</h2>
+      <h2 className={styles.h2}>INFORMACIÓN</h2>
       <div className={styles.inputs_container}>
         <div className={styles.input_section}>
           <div className={styles.input_section_descriptor}>Tipo de reserva</div>
-          <select name="tipo_reserva" required value={information.tipo_reserva} onChange={(e)=>setInformation({...information ,tipo_reserva: e.target.value})}>
+          <select name="tipo_reserva" required value={information.tipo_reserva} onChange={(e)=>setInformation({...information ,tipo_reserva: e.target.value})} className={styles.hide_disabled_option}>
             <option value="" disabled>Seleccionar</option>
             <option value="Anual">Anual</option>
             <option value="1er Cuatrimestre">1er Cuatrimestre</option>
@@ -60,7 +60,7 @@ function InformationInputSection({information, setInformation, resetInputs}) {
         </div>
         <div className={styles.input_section}>
           <div className={styles.input_section_descriptor}>Tipo de aula</div>
-          <select name="tipo_aula" required value={information.tipo_aula} onChange={(e)=>setInformation({...information ,tipo_aula: e.target.value})}>
+          <select name="tipo_aula" required value={information.tipo_aula} onChange={(e)=>setInformation({...information ,tipo_aula: e.target.value})} className={styles.hide_disabled_option}>
             <option value="" disabled>Seleccionar</option>
             <option value="Multimedia">Multimedia</option>
             <option value="Informatica">Informatica</option>
@@ -69,7 +69,7 @@ function InformationInputSection({information, setInformation, resetInputs}) {
         </div>
         <div className={styles.input_section}>
           <div className={styles.input_section_descriptor}>Curso</div>
-          <select name="curso" required value={information.curso} onChange={(e)=>handleChooseCurso(e)}>
+          <select name="curso" required value={information.curso} onChange={(e)=>handleChooseCurso(e)} className={styles.hide_disabled_option}>
             <option value="" disabled>Seleccionar</option>
             {
               cursosDisponibles.map((curso) => <option value={curso[1]} key={curso[1]}>{curso[1]}</option>)
@@ -78,7 +78,7 @@ function InformationInputSection({information, setInformation, resetInputs}) {
         </div>
         <div className={styles.input_section}>
           <div className={styles.input_section_descriptor}>Apellido docente</div>
-          <select name="apellido" required value={information.apellido} onChange={(e)=>handleChooseProfesorApellido(e)}>
+          <select name="apellido" required value={information.apellido} onChange={(e)=>handleChooseProfesorApellido(e)} className={styles.hide_disabled_option}>
             <option value="" disabled>Seleccionar</option>
             {
               apellidosProfesoresDisponibles.map((apellido) => <option value={apellido} key={apellido}>{apellido}</option>)
@@ -87,7 +87,7 @@ function InformationInputSection({information, setInformation, resetInputs}) {
         </div>
         <div className={styles.input_section}>
           <div className={styles.input_section_descriptor}>Nombre docente</div>
-          <select name="nombre" required value={information.nombre} onChange={(e)=>handleChooseProfesorName(e)}>
+          <select name="nombre" required value={information.nombre} onChange={(e)=>handleChooseProfesorName(e)} className={styles.hide_disabled_option}>
             <option value="" disabled>Seleccionar</option>
             {
               nombresProfesoresDisponibles.map((nombre) => <option value={nombre} key={nombre}>{nombre}</option>)
