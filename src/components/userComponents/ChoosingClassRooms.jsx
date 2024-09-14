@@ -28,16 +28,18 @@ function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, 
             "Esporadica": "esporadica"
         }
 
+        const url = (information.tipo_reserva=="Esporadica") ? "http://localhost:3000/reservas/esporadica" : "http://localhost:3000/reservas/periodica"
+
         const data = {
             bedel_id: "admin",
             id_docente: information.profesorId,
             id_curso: information.cursoId,
-            frecuencia: frecuenciaByTipoReserva[information.tipo_reserva],
             correo_contacto: information.email,
             cantidad_alumnos: Number(information.cantidad_alumnos),
             renglones: days.map((d) => {
                 return {
                     dia: d.day.toLowerCase(),
+                    fecha: d.day.toLowerCase(),
                     hora_inicio: d.start,
                     duracion: d.duration,
                     numero_aula: Number(d.chosenAula)
@@ -45,9 +47,13 @@ function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, 
             })
         }
 
+        if(!(information.tipo_reserva=="Esporadica")) {
+            data["frecuencia"] = frecuenciaByTipoReserva[information.tipo_reserva]
+        }
+
         axios({
             method: 'post',
-            url: `http://localhost:3000/reservas/periodica`,
+            url: url,
             data: data
         }).then(response => {
             //### Avisar exito

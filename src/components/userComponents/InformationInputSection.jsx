@@ -3,7 +3,7 @@ import axios from "axios"
 
 import styles from "../../styles/userStyles/informationInputSection.module.css"
 
-function InformationInputSection({information, setInformation, resetInputs}) {
+function InformationInputSection({information, setInformation, resetInputs, resetDaysInput}) {
 
   const [cursosDisponibles, setCursosDisponibles] = useState([])
   const [profesoresDisponibles, setProfesoresDisponibles] = useState([])
@@ -41,6 +41,17 @@ function InformationInputSection({information, setInformation, resetInputs}) {
     setInformation({...information, cursoId:cursoId, curso:e.target.value})
   }
 
+  const handleTipoReservaChange = (e) => {
+    const newTipo = e.target.value
+    if(information.tipo_reserva.toLowerCase()=="esporadica" && newTipo.toLowerCase()!=="esporadica"){
+      resetDaysInput()
+    } else if(information.tipo_reserva.toLowerCase()!=="esporadica" && newTipo.toLowerCase()=="esporadica"){
+      resetDaysInput()
+    }
+
+    setInformation({...information ,tipo_reserva: e.target.value})
+  }
+
   const apellidosProfesoresDisponibles = [... new Set(profesoresDisponibles.map(p => p[2]))]
   const nombresProfesoresDisponibles = [... new Set(profesoresDisponibles.filter(p => p[2]===information.apellido).map(p => p[1]))]
   return (
@@ -50,7 +61,7 @@ function InformationInputSection({information, setInformation, resetInputs}) {
       <div className={styles.inputs_container}>
         <div className={styles.input_section}>
           <div className={styles.input_section_descriptor}>Tipo de reserva</div>
-          <select name="tipo_reserva" required value={information.tipo_reserva} onChange={(e)=>setInformation({...information ,tipo_reserva: e.target.value})} className={styles.hide_disabled_option}>
+          <select name="tipo_reserva" required value={information.tipo_reserva} onChange={(e)=>handleTipoReservaChange(e)} className={styles.hide_disabled_option}>
             <option value="" disabled>Seleccionar</option>
             <option value="Anual">Anual</option>
             <option value="1er Cuatrimestre">1er Cuatrimestre</option>
@@ -87,7 +98,7 @@ function InformationInputSection({information, setInformation, resetInputs}) {
         </div>
         <div className={styles.input_section}>
           <div className={styles.input_section_descriptor}>Nombre docente</div>
-          <select name="nombre" required value={information.nombre} onChange={(e)=>handleChooseProfesorName(e)} className={styles.hide_disabled_option}>
+          <select name="nombre" required disabled={!information.apellido} value={information.nombre} onChange={(e)=>handleChooseProfesorName(e)} className={styles.hide_disabled_option}>
             <option value="" disabled>Seleccionar</option>
             {
               nombresProfesoresDisponibles.map((nombre) => <option value={nombre} key={nombre}>{nombre}</option>)

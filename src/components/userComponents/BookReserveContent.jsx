@@ -28,9 +28,12 @@ function BookReserveContent() {
     
     const resetInformation = () => setInformation(defaultInformation)
 
+    const resetDaysInput = () => setDaysReserved([{day: "", start: "", duration: ""}])
 
     const handleSumbit = (e) => {
         e.preventDefault()
+
+        const url = (information.tipo_reserva=="Esporadica") ? "http://localhost:3000/disponibilidad/esporadica" : "http://localhost:3000/disponibilidad/periodica"
 
         const data = {
             frecuencia: information.tipo_reserva.toLowerCase(),
@@ -40,6 +43,7 @@ function BookReserveContent() {
                 return {
                     id: idx,
                     dia: d.day.toLowerCase(),
+                    fecha: d.day.toLowerCase(),
                     hora_inicio: d.start,
                     duracion: d.duration
                 }
@@ -47,7 +51,7 @@ function BookReserveContent() {
         }
         axios({
             method: 'post',
-            url: `http://localhost:3000/disponibilidad/periodica`,
+            url: url,
             data: data
         }).then(res => {
             if(res.status==200){
@@ -68,7 +72,7 @@ function BookReserveContent() {
         <div className={styles.container}>
             {!isChoosingAulas &&
             <form onSubmit={(e) => handleSumbit(e)} className={styles.table_container}>
-                <InformationInputSection information={information} setInformation={setInformation} resetInputs={resetInformation}/>
+                <InformationInputSection information={information} setInformation={setInformation} resetInputs={resetInformation} resetDaysInput={resetDaysInput}/>
                 <DayInputSection daysReserved={daysReserved} setDaysReserved={setDaysReserved} information={information}/>
             </form>
             }{isChoosingAulas &&

@@ -37,6 +37,18 @@
     appearance: select;
 }
 
+.table input {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: medium;
+    text-align: center;
+    text-indent: 10px;
+    text-overflow: '';
+}
+
 .table select::-ms-expand {
     display: none;
 }

@@ -1,6 +1,7 @@
 
 import styles from "../../styles/userStyles/dayInputSection.module.css"
 import { addTimes } from "../../services/addTimes"
+import getCurrentDayString from "../../services/getCurrentDayString"
 
 function DayInputSection({ daysReserved, setDaysReserved, information }) {
 
@@ -13,7 +14,7 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
     if (!information.tipo_reserva) {
         return (
             <div>
-                <h2>RESERVAS</h2>
+                <h2 className={styles.day_input_h2}>RESERVAS</h2>
                 <p>Seleccione un tipo de reserva...</p>
             </div>
         )
@@ -50,7 +51,7 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
             else startEnum.push(`${i}:${j === 0 ? `00` : 30 * j}`);
         }
     }
-    console.log(startEnum)
+
     const durationEnum = [];
     for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 2; j++) {
@@ -77,15 +78,20 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
                         {daysReserved.map((dayReserved, idx) =>
                             <tr key={idx}>
                                 <td className={styles.dayInputCell}>
-                                    <select required value={dayReserved.day} onChange={(e) => updateDay(idx, { ...dayReserved, day: e.target.value })}>
-                                        <option value="" hidden disabled>Seleccionar</option>
-                                        {dayReserved.day &&
-                                            daysEnum.concat(dayReserved.day).map((dayOfTheWeek) => <option key={dayOfTheWeek} value={dayOfTheWeek}>{dayOfTheWeek}</option>)
-                                        }
-                                        {!dayReserved.day &&
-                                            daysEnum.map((dayOfTheWeek) => <option key={dayOfTheWeek} value={dayOfTheWeek}>{dayOfTheWeek}</option>)
-                                        }
-                                    </select>
+                                    {information.tipo_reserva.toLowerCase() == "esporadica" &&
+                                        <input type="date" name="dia" value={dayReserved.day} min={getCurrentDayString()} onChange={(e) => updateDay(idx, { ...dayReserved, day: e.target.value })}/>
+                                    }
+                                    {!(information.tipo_reserva.toLowerCase() == "esporadica") &&
+                                        <select required value={dayReserved.day} onChange={(e) => updateDay(idx, { ...dayReserved, day: e.target.value })}>
+                                            <option value="" hidden disabled>Seleccionar</option>
+                                            {dayReserved.day &&
+                                                daysEnum.concat(dayReserved.day).map((dayOfTheWeek) => <option key={dayOfTheWeek} value={dayOfTheWeek}>{dayOfTheWeek}</option>)
+                                            }
+                                            {!dayReserved.day &&
+                                                daysEnum.map((dayOfTheWeek) => <option key={dayOfTheWeek} value={dayOfTheWeek}>{dayOfTheWeek}</option>)
+                                            }
+                                        </select>
+                                    }
                                 </td>
                                 <td className={styles.dayInputCell}>
                                     <select required value={dayReserved.start} onChange={(e) => updateDay(idx, { ...dayReserved, start: e.target.value })}>
@@ -113,7 +119,7 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
                         )}
                     </tbody>
                 </table>
-                <button className={styles.add_btn} onClick={(e) => addDay(e)} disabled={daysReserved.length == 7}>AGREGAR DÍA</button>
+                <button className={styles.add_btn} onClick={(e) => addDay(e)} disabled={daysReserved.length >= 7 && !(information.tipo_reserva.toLowerCase() == "esporadica")}>AGREGAR DÍA</button>
                 <input type="submit" value="SELECCIONAR AULAS" className={styles.sumbit_btn}></input>
             </div>
         </div>
