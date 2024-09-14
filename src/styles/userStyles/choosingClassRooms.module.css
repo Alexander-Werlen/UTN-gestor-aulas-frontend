@@ -1,0 +1,78 @@
+hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #333;  /* old IE */
+    background-color: #333;  /* Modern Browsers */
+    margin-bottom: 8px;
+}
+
+table .table_container{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+td, th {
+    width: 20%;
+    height: 40px;
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 0px;
+}
+
+th {
+    background-color: rgb(171, 171, 171);
+    top: 0;
+    z-index: 2;
+    position: sticky;
+}
+
+tr:nth-child(even) {
+    background-color: #EEEEEE;
+}
+
+ul {
+    list-style-position: inside;
+}
+
+
+.submit_btn {
+    margin-top: 30px;
+    height: 40px;
+    width: 250px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #16cce0;
+    transition: background-color 100ms;
+}
+
+.submit_btn:hover {
+    background-color: #14a7b8;
+}
+
+.cancel_btn {
+    margin-top: 30px;
+    height: 40px;
+    width: 250px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #a8a8a8;
+    transition: background-color 100ms;
+}
+
+
+.cancel_btn:hover {
+    background-color: #989898;
+}

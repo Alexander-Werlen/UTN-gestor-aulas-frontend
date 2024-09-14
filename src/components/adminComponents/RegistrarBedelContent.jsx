@@ -38,6 +38,7 @@ function RegistrarBedelContent() {
       const validation = validatePassword(contraseña, contraseñaConfirmacion)
       if(!validation.isValid) {
         //handle error
+        alert(validation.error)
         console.log(validation.error)
         return;
       }
@@ -50,9 +51,11 @@ function RegistrarBedelContent() {
         data: bedelData
       }).then(response => {
           //### Avisar exito
+          alert("Bedel registrado con exito")
           console.log(response)
       }).catch(e => {
           //### Avisar error
+          alert("No se pudo registrar el bedel")
           console.log(e)
       })
   }

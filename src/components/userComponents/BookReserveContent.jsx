@@ -4,21 +4,27 @@ import axios from "axios"
 import styles from "../../styles/userStyles/bookReserveContent.module.css"
 import InformationInputSection from "./InformationInputSection"
 import DayInputSection from "./DayInputSection"
+import ChoosingClassRooms from "./ChoosingClassRooms"
 
 function BookReserveContent() {
 
     const defaultInformation = {
         nombre: "",
         apellido: "",
+        profesorId: 0,
         email: "",
         cantidad_alumnos: "",
         tipo_reserva: "",
         tipo_aula: "",
-        curso: ""
+        curso: "",
+        cursoId: 0,
+        bedelId: ""
     }
     
     const [information, setInformation] = useState(defaultInformation)
     const [daysReserved, setDaysReserved] = useState([{day: "", start: "", duration: ""}])
+    const [isChoosingAulas, setIsChoosingAulas] = useState(false)
+    const [aulasDisponiblesPorDia, setAulasDisponiblesPorDia] = useState([])
     
     const resetInformation = () => setInformation(defaultInformation)
 
@@ -28,8 +34,8 @@ function BookReserveContent() {
         const data = {
             frecuencia: information.tipo_reserva.toLowerCase(),
             tipo_aula: information.tipo_aula.toLowerCase(),
-            cantidad_alumnos: information.cantidad_alumnos,
-            reglones: daysReserved.map((d, idx) => {
+            cantidad_alumnos: Number(information.cantidad_alumnos),
+            renglones: daysReserved.map((d, idx) => {
                 return {
                     id: idx,
                     dia: d.day.toLowerCase(),
@@ -38,12 +44,18 @@ function BookReserveContent() {
                 }
             })
         }
-        console.log(data)
         axios({
             method: 'post',
             url: `http://localhost:3000/disponibilidad/periodica`,
             data: data
         }).then(res => {
+            if(res.status==200){
+                alert("No hay aulas que cumplan con las restricciones de minimo alumno y tipos de aula")
+                return
+            }
+            //continue with reservation
+            setAulasDisponiblesPorDia(res.data)
+            setIsChoosingAulas(true)
             console.log(res)    
         }).catch(e => {
             console.log(e)
@@ -54,10 +66,14 @@ function BookReserveContent() {
     return (
 
         <div className={styles.container}>
-            <form onSubmit={(e) => handleSumbit(e)}>
+            {!isChoosingAulas &&
+            <form onSubmit={(e) => handleSumbit(e)} className={styles.table_container}>
                 <InformationInputSection information={information} setInformation={setInformation} resetInputs={resetInformation}/>
                 <DayInputSection daysReserved={daysReserved} setDaysReserved={setDaysReserved} information={information}/>
             </form>
+            }{isChoosingAulas &&
+                <ChoosingClassRooms aulasDisponiblesPorDia={aulasDisponiblesPorDia} tipoReserva={information.tipo_reserva} daysReserved={daysReserved} setDaysReserved={setDaysReserved}/>
+            }
         </div>
 
     )

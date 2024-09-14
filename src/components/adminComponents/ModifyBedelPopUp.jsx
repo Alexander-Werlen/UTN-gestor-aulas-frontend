@@ -18,16 +18,17 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
             apellido: apellido,
             nombre: nombre,
             turno: turno,
-            contraseña: contraseña,
+            password: contraseña,
             identificador: bedelData.identificador
         }
     }
 
-    const tryModification = () => {
+    const tryModification = (e) => {
+        e.preventDefault()
         if(contraseña || contraseñaConfirmacion){
             const validation = validatePassword(contraseña, contraseñaConfirmacion)
             if(!validation.isValid) {
-                //show error popup
+                alert(validation.error)
                 console.log(validation.error)
                 return
             }
@@ -38,6 +39,7 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
     return (
         <div className={styles.overlay}>
             <div className={styles.popup_container}>
+                <form onSubmit={(e) => tryModification(e)}>
                 <div className={styles.header_container}>
                     <span>MODIFICAR BEDEL</span>
                     <button className={styles.close_btn} onClick={() => closePopUp()}>&#10006;</button>
@@ -45,11 +47,11 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
                 <hr/>
                 <div className={styles.content_container}>
                     <h4>Apellido</h4>
-                    <input type="text" value={apellido} onChange={(e)=>setApellido(e.target.value)}></input>
+                    <input type="text" required value={apellido} onChange={(e)=>setApellido(e.target.value)}></input>
                     <h4>Nombre</h4>
-                    <input type="text" value={nombre} onChange={(e)=>setNombre(e.target.value)}></input>
+                    <input type="text" required value={nombre} onChange={(e)=>setNombre(e.target.value)}></input>
                     <h4>Identificador</h4>
-                    <input type="text" value={bedelData.identificador} disabled></input>
+                    <input type="text" required value={bedelData.identificador} disabled></input>
                     <h4>Turno</h4>
                     <select value={turno} onChange={(e)=>setTurno(e.target.value)}>
                         <option value="mañana">Mañana</option>
@@ -68,9 +70,10 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
                     </div>
                 </div>
                 <div className={styles.btn_section_container}>
-                    <button onClick={() => tryModification()} className={styles.modificar_btn}>Modificar</button>
+                    <input value="Modificar" className={styles.modificar_btn} type="submit"></input>
                     <button onClick={() => closePopUp()} className={styles.cerrar_btn}>Cancelar</button>
                 </div>
+                </form>
             </div>
         </div>
     )

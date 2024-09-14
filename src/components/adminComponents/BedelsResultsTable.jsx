@@ -46,10 +46,10 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
             method: 'delete',
             url: `http://localhost:3000/bedeles/${identificador}`,
         }).then(response => {
-            //### Avisar exito
+            alert("El bedel fue eliminado con exito")
             console.log(response)
         }).catch(e => {
-            //### Avisar error
+            alert("El bedel no se pudo eliminar")
             console.log(e)
         })
 
@@ -69,10 +69,10 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
                 contraseña: modifiedBedel.contraseña
             }
         }).then(response => {
-            //### Avisar exito
+            alert("El bedel fue modificado con exito")
             console.log(response)
         }).catch(e => {
-            //### Avisar error
+            alert("El bedel no se pudo modificar")
             console.log(e)
         })
 

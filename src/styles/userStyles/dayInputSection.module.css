@@ -3,9 +3,11 @@ table {
     font-family: arial, sans-serif;
     border-collapse: separate;
     border-spacing: 0;
+    margin: 0px;
+    padding: 0px;
 }
 
-td, th {
+td .dayInputCell, th {
     width: 20%;
     height: 40px;
     border: 1px solid #000000;

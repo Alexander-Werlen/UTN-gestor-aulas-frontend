@@ -60,8 +60,8 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
     return (
         <div>
             <h2>RESERVAS</h2>
-            <div className={styles.table_container}>
-            <table>
+            <div>
+            <table className={styles.table_container}>
                 <thead>
                     <tr>
                         <th>DÍA</th>
@@ -71,9 +71,8 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
                 </thead>
                 <tbody>
                 {daysReserved.map((dayReserved, idx)=>
-                    
                     <tr key={idx}>
-                        <td>
+                        <td className={styles.dayInputCell}>
                             <select required value={dayReserved.day} onChange={(e)=>updateDay(idx, {...dayReserved, day: e.target.value})}>
                             <option value="" disabled>Seleccionar</option>
                             {dayReserved.day &&
@@ -84,13 +83,13 @@ function DayInputSection({daysReserved, setDaysReserved, information}) {
                             }
                             </select>
                         </td>
-                        <td>
+                        <td className={styles.dayInputCell}>
                             <select required value={dayReserved.start} onChange={(e)=>updateDay(idx, {...dayReserved, start: e.target.value})}>
                             <option value="" disabled>Seleccionar</option>
                             {startEnum.map((start) => <option key={start} value={start}>{start}</option>)}
                             </select>
                         </td>
-                        <td>
+                        <td className={styles.dayInputCell}>
                             <div className={styles.last_row_container}>
                             <select required value={dayReserved.duration} onChange={(e)=>updateDay(idx, {...dayReserved, duration: e.target.value})}>
                             <option value="" disabled>Seleccionar</option>
