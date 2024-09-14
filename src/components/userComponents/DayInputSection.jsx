@@ -46,10 +46,11 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
     const startEnum = [];
     for (let i = 8; i < 23; i++) {
         for (let j = 0; j < 2; j++) {
-            startEnum.push(`${i}:${j === 0 ? `00` : 30 * j}`);
+            if(i<10) startEnum.push(`0${i}:${j === 0 ? `00` : 30 * j}`)
+            else startEnum.push(`${i}:${j === 0 ? `00` : 30 * j}`);
         }
     }
-
+    console.log(startEnum)
     const durationEnum = [];
     for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 2; j++) {
@@ -89,18 +90,20 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
                                 <td className={styles.dayInputCell}>
                                     <select required value={dayReserved.start} onChange={(e) => updateDay(idx, { ...dayReserved, start: e.target.value })}>
                                         <option value="" hidden disabled>Seleccionar</option>
-                                        {startEnum.map((start) => 
-                                        (addTimes(start, dayReserved.duration) <= "23:30") &&
-                                             <option key={start} value={start}>{start}</option>)}
+                                        {
+                                        startEnum.filter(start => (!dayReserved.duration || addTimes(start, dayReserved.duration) <= "23:30"))
+                                        .map((start) => <option key={start} value={start}>{start}</option>)
+                                        }
                                     </select>
                                 </td>
                                 <td className={styles.dayInputCell}>
                                     <div className={styles.last_row_container}>
                                         <select required value={dayReserved.duration} onChange={(e) => updateDay(idx, { ...dayReserved, duration: e.target.value })}>
                                             <option value="" hidden disabled>Seleccionar</option>
-                                            {durationEnum.map((duration) => 
-                                            (dayReserved.start && addTimes(dayReserved.start, duration) <= "23:30") &&
-                                            <option key={duration} value={duration}>{duration}</option>)}
+                                            {
+                                            durationEnum.filter(duration => (!dayReserved.duration || addTimes(dayReserved.start, duration) <= "23:30"))
+                                            .map((duration) => <option key={duration} value={duration}>{duration}</option>)
+                                            }
                                         </select>
                                         <button className={styles.delete_day_btn_container} onClick={(e) => deleteDay(e, idx)} hidden={daysReserved.length == 1}>&#10006;</button>
                                     </div>

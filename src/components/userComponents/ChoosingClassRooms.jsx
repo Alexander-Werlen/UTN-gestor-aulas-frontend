@@ -44,7 +44,6 @@ function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, 
                 }
             })
         }
-        console.log(data)
 
         axios({
             method: 'post',
@@ -52,6 +51,7 @@ function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, 
             data: data
         }).then(response => {
             //### Avisar exito
+            setDaysReserved([{day: "", start: "", duration: ""}])
             alert("Reserva exitosa")
             console.log(response)
         }).catch(e => {
