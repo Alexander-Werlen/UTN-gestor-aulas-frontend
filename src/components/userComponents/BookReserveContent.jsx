@@ -5,6 +5,7 @@ import styles from "../../styles/userStyles/bookReserveContent.module.css"
 import InformationInputSection from "./InformationInputSection"
 import DayInputSection from "./DayInputSection"
 import ChoosingClassRooms from "./ChoosingClassRooms"
+import ConflictosPopUp from "./ConflictosPopUp"
 
 function BookReserveContent() {
 
@@ -24,11 +25,15 @@ function BookReserveContent() {
     const [information, setInformation] = useState(defaultInformation)
     const [daysReserved, setDaysReserved] = useState([{day: "", start: "", duration: ""}])
     const [isChoosingAulas, setIsChoosingAulas] = useState(false)
+    const [isShowingConflictos, setIsShowingConflictos] = useState(false)
+    const [conflictos, setConflictos] = useState([])
     const [aulasDisponiblesPorDia, setAulasDisponiblesPorDia] = useState([])
     
     const resetInformation = () => setInformation(defaultInformation)
 
     const resetDaysInput = () => setDaysReserved([{day: "", start: "", duration: ""}])
+
+    const closePopUp = () => setIsShowingConflictos(false)
 
     const handleSumbit = (e) => {
         e.preventDefault()
@@ -62,7 +67,12 @@ function BookReserveContent() {
             setAulasDisponiblesPorDia(res.data)
             setIsChoosingAulas(true)
         }).catch(e => {
-            console.log(e)
+            if(e.status==409){
+                setIsShowingConflictos(true)
+                setConflictos(e.response.data.conflictos)
+            }else{
+                console.log(e)
+            }
         })
 
     }
@@ -77,6 +87,9 @@ function BookReserveContent() {
             </form>
             }{isChoosingAulas &&
                 <ChoosingClassRooms aulasDisponiblesPorDia={aulasDisponiblesPorDia} information={information} daysReserved={daysReserved} setDaysReserved={setDaysReserved} setIsChoosingAulas={setIsChoosingAulas}/>
+            }
+            {isShowingConflictos && 
+                    <ConflictosPopUp closePopUp={closePopUp} conflictos={conflictos} daysReserved={daysReserved}/>
             }
         </div>
 

@@ -12,7 +12,8 @@ export const addTimes = (start, duration) => {
         endHour += 1
         endMinutes -= 60
     }
-    return `${endHour}:${endMinutes}`
+    if(endHour<10) return `0${endHour}:${endMinutes}`
+    else return `${endHour}:${endMinutes}`
 }
     
 export default addTimes

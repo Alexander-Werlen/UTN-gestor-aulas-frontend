@@ -21,6 +21,12 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
     }
 
     const updateDay = (idxModified, modifiedDay) => {
+
+        const apariciones = daysReserved.filter((d,idx) => d.day == modifiedDay.day && idx!=idxModified ).length
+        if(apariciones>0){
+            alert("La fecha ya fue utilizada")
+            return
+        }
         setDaysReserved(daysReserved.map((dayReserved, idx) => {
             if (idx == idxModified) return modifiedDay
             return dayReserved
