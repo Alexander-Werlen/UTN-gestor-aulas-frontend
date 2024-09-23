@@ -1,38 +1,137 @@
-.nav_bar {
-    width: max(70%, 800px);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    /* Cambiado a columna para que el contenido esté apilado */
+    background-color: var(--primary-main);
+    color: white;
+}
+
+.header_content{
+    width: var(--workspace-width);
     height: 100%;
     margin: auto;
+}
+
+/* Sección con nombre de la aplicación y menú desplegable */
+.app_section {
     display: flex;
-    overflow: hidden;
-    background-color: var(--white);
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 6px 30px;
+    /* sombra en la parte inferior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Nombre de la aplicación */
+.app_name {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Ícono de perfil */
+.profile_icon_container {
+    position: relative;
+}
+
+.profile_icon {
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+.profile_icon:hover {
+    color: var(--primary-light);
+}
+
+/* Menú desplegable */
+.dropdown_menu {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: max(200px, 20%);
+    /* Posición justo debajo del ícono */
+    background-color: white;
+    list-style-type: none;
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown_item {
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    transition: background-color 100ms;
+
+}
+
+
+.dropdown_item a {
+    color: black;
+    text-decoration: none;
+    display: block;
+
+}
+
+.dropdown_item a:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.nav_bar_list {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    height: 3.4rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav_bar_list_item {
+    color: white;
+    width: 100%;
+    text-decoration: none;
 }
 
 .nav_bar_section {
-    height: 100%;
-    width: 17%;
-    color: black;
+    color: white;
     text-decoration: none;
-    display: flex;
-    border: black;
-
     transition: background-color 100ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    height: 100%;
 }
 
+/* hover and focus same styles */
 .nav_bar_section:hover {
-    background-color: var(--grey);
+    background-color: var(--primary-light);
+    color: #000;
 }
+
+.nav_bar_section:focus {
+    background-color: var(--primary-light);
+    color: #000;
+}       
 
 .nav_bar_section.active {
-    color: black;
-    background-color: var(--blue);
+    background-color: var(--primary-dark);
+    color: #fff;
 }
 
-.nav_section_text{
+.nav_section_text {
     text-align: center;
     margin: auto;
     font-size: min(30px, 80%);
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
 }

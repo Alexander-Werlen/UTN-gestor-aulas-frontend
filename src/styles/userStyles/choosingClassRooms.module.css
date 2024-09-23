@@ -25,14 +25,15 @@
 }
 
 .table th {
-    background-color: rgb(171, 171, 171);
+    background-color: var(--primary-main);
+    color: white;
     top: 0;
     z-index: 2;
     position: sticky;
 }
 
 .table tr:nth-child(even) {
-    background-color: #EEEEEE;
+    background-color: #f2f2f2;
 }
 
 .table ul {
@@ -45,36 +46,38 @@
     height: 40px;
     width: 250px;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    color: white    ;
+    border: none;
+    border-radius: 8px;
     box-sizing: border-box;
     font-size: 20px;
     cursor: pointer;
-    background-color: #16cce0;
+    background-color: var(--secondary-main);
     transition: background-color 100ms;
 }
 
 .submit_btn:hover {
-    background-color: #14a7b8;
+    background-color: var(--secondary-dark);
 }
 
 .cancel_btn {
     margin-top: 30px;
     height: 40px;
     width: 250px;
+    color: white;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: none;
+    border-radius: 6px;
     box-sizing: border-box;
     font-size: 20px;
     cursor: pointer;
-    background-color: #a8a8a8;
+    background-color: var(--gray-main);
     transition: background-color 100ms;
 }
 
 
 .cancel_btn:hover {
-    background-color: #989898;
+    background-color: var(--gray-dark);
 }
 
 .btn_container {

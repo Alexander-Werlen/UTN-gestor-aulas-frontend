@@ -1,5 +1,5 @@
 import { useState } from "react"
-import validatePassword from "../../services/passwordValidation"
+import validatePassword from "../../utils/passwordValidation"
 import axios from 'axios'
 
 import styles from "../../styles/adminStyles/registrarBedelContent.module.css"

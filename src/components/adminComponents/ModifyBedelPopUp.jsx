@@ -1,5 +1,5 @@
 import { useState } from "react";
-import validatePassword from "../../services/passwordValidation"
+import validatePassword from "../../utils/passwordValidation"
 
 import styles from "../../styles/adminStyles/modifyBedelPopUp.module.css"
 

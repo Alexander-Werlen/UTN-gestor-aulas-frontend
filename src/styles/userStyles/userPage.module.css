@@ -1,19 +1,15 @@
 
 .user_page_container {
-    width: 100%;
+    width: max(70%, 800px);
     height: 100vh; /* redundancy for browser support */
-    overflow: auto;
 }
 
-.nav_bar_container {
-    width: 100%;
-    margin: auto;
-    height: max(50px, 6%);
-    background-color: var(--white);
-}
 
-.content_container {
-    width: 100%;
-    width: calc(100%-max(50px, 6%));
-}
 
+.content_container{
+        width: var(--workspace-width);
+        height: 100%;
+        margin:auto;
+        background-color: rgb(246, 246, 246);
+        padding: 10px;
+}

@@ -1,7 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
 
-import styles from "../../styles/userStyles/bookReserveContent.module.css"
 import InformationInputSection from "./InformationInputSection"
 import DayInputSection from "./DayInputSection"
 import ChoosingClassRooms from "./ChoosingClassRooms"
@@ -79,9 +78,9 @@ function BookReserveContent() {
 
     return (
 
-        <div className={styles.container}>
+        <>
             {!isChoosingAulas &&
-            <form onSubmit={(e) => handleSumbit(e)} className={styles.table_container}>
+            <form onSubmit={(e) => handleSumbit(e)}>
                 <InformationInputSection information={information} setInformation={setInformation} resetInputs={resetInformation} resetDaysInput={resetDaysInput}/>
                 <DayInputSection daysReserved={daysReserved} setDaysReserved={setDaysReserved} information={information}/>
             </form>
@@ -91,7 +90,7 @@ function BookReserveContent() {
             {isShowingConflictos && 
                     <ConflictosPopUp closePopUp={closePopUp} conflictos={conflictos} daysReserved={daysReserved}/>
             }
-        </div>
+        </>
 
     )
 }

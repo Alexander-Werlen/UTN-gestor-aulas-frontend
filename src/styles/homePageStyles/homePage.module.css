@@ -1,48 +1,57 @@
 
-h1 {
-    text-align: center;
-    margin: 30px 15px;
+
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.home_page_container {
+.loginForm {
+    padding: 2rem;
+    border: 3px solid var(--primary-main);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgb(177, 183, 194)
+}
+
+.loginForm h2 {
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+}
+
+.loginForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: black;
+}
+
+.loginForm input,
+.loginForm select {
     width: 100%;
-    margin-top: 100px;
-}
-.links_container {
-    width: 100%;
-}
-
-.link_container {
-    width: 200px;
-    margin: auto;
-    margin-top: 20px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--primary-light);
+    border-radius: 4px;
 }
 
-button.link {
-    width: 200px;
-    height: 60px;
-    background: #fff;
-    border-radius: .375rem;
-    border-style: solid;
-    border-width: .125rem;
-    box-sizing: border-box;
-    color: #212121;
+
+
+.loginForm button {
+    background-color: var(--secondary-main);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    font-size: large;
+    transition: background-color 0.3s;
 }
 
-button.link:hover {
-    background: #53c2eb;
+.loginForm button:hover {
+    background-color: var(--secondary-dark);
 }
 
-.link_text {
-    text-decoration: none;
+.hiddenLink {
+    display: none;
+    /* Los links son ocultos y solo se usan para redirección */
 }
-
-span {
-    color:#212121;
-    font-weight: 700;
-}
-

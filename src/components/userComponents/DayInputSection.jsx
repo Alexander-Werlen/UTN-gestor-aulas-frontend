@@ -1,7 +1,7 @@
 
 import styles from "../../styles/userStyles/dayInputSection.module.css"
-import { addTimes } from "../../services/addTimes"
-import getCurrentDayString from "../../services/getCurrentDayString"
+import { addTimes } from "../../utils/addTimes"
+import getCurrentDayString from "../../utils/getCurrentDayString"
 
 function DayInputSection({ daysReserved, setDaysReserved, information }) {
 
@@ -126,7 +126,7 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
                     </tbody>
                 </table>
                 <button className={styles.add_btn} onClick={(e) => addDay(e)} disabled={daysReserved.length >= 7 && !(information.tipo_reserva.toLowerCase() == "esporadica")}>AGREGAR DÍA</button>
-                <input type="submit" value="SELECCIONAR AULAS" className={styles.sumbit_btn}></input>
+                <input type="submit" value="Seleccionar Aulas" className={styles.sumbit_btn}></input>
             </div>
         </div>
     )
