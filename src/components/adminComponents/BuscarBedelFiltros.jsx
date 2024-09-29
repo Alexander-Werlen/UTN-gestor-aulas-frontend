@@ -24,30 +24,48 @@ function BuscarBedelFiltros({setApellido, setTurno}) {
   return (
     
     <>
-      <form onSubmit={(e) => setFilters(e)} className={styles.buscar_bedel_input_container}>
-        <div className={styles.buscar_bedel_input_section}>
-          <label>
-            <div className={styles.input_section_descriptor}>Apellido</div>
-            <input type="text" value={apellidoHolder} onChange={(e)=>setApellidoHolder(e.target.value)} />
-          </label>
-        </div>
-        <div className={styles.buscar_bedel_input_section}>
-          <div className={styles.input_section_descriptor}>Turno</div>
-          <select value={turnoHolder} onChange={(e)=>setTurnoHolder(e.target.value)}>
+  <form onSubmit={(e) => setFilters(e)} className={styles.form_Buscar_Bedel}>
+      <div className={styles.input_section}>
+        <label htmlFor="apellido">
+          Apellido
+          <input
+            id="apellido"
+            type="text"
+            value={apellidoHolder}
+            onChange={(e) => setApellidoHolder(e.target.value)}
+            className={styles.input_text}
+          />
+        </label>
+      </div>
+
+      <div className={styles.input_section}>
+        <label htmlFor="turno">
+          Turno
+          <select
+            id="turno"
+            value={turnoHolder}
+            onChange={(e) => setTurnoHolder(e.target.value)}
+            className={styles.select_text}
+          >
             <option value="todos">Todos</option>
             <option value="mañana">Mañana</option>
             <option value="tarde">Tarde</option>
             <option value="noche">Noche</option>
           </select>
-        </div>
-        <div className={styles.buscar_bedel_input_section}>
-          <input type="submit" value="BUSCAR"/>
-        </div>
-        <div className={styles.buscar_bedel_input_section}>
-          <button onClick={(e)=>resetInputs(e)}>limpiar</button>
-        </div>
-      </form>
-    </>
+        </label>
+      </div>
+
+      <div className={styles.button_Section}>
+        <button type="submit"  className={styles.button_Buscar}>
+          Buscar
+          </button>
+        <button type="button" onClick={(e) => resetInputs(e)} className={styles.button_Limpiar}>
+          Limpiar
+        </button>
+      </div>
+  </form>
+</>
+
     
   )
 }

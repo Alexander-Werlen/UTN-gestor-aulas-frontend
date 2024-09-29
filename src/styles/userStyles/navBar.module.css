@@ -111,6 +111,19 @@
     height: 100%;
 }
 
+.nav_bar_section.active {
+    background-color: var(--primary-dark) !important;
+    color: #fff;
+    /* No cambiar el puntero */
+    cursor: default;
+
+
+}
+.nav_bar_section.active:hover ,.nav_bar_section.active:focus {
+    background-color: var(--primary-dark);
+    color: #fff;
+}
+
 /* hover and focus same styles */
 .nav_bar_section:hover {
     background-color: var(--primary-light);
@@ -122,10 +135,6 @@
     color: #000;
 }       
 
-.nav_bar_section.active {
-    background-color: var(--primary-dark);
-    color: #fff;
-}
 
 .nav_section_text {
     text-align: center;

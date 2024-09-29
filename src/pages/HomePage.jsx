@@ -22,7 +22,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <main className={styles.loginContainer}>
       <form className={styles.loginForm} onSubmit={handleLogin}>
         <h2>Iniciar Sesión</h2>
         <label>
@@ -55,7 +55,7 @@ const HomePage = () => {
         {role === 'user' && <Link to="/user/reserve/book" className={styles.hiddenLink}></Link>}
         {role === 'admin' && <Link to="/admin/bedel/search" className={styles.hiddenLink}></Link>}
       </form>
-    </div>
+    </main>
   );
 };
 

@@ -1,17 +1,17 @@
 import { Routes, Route } from "react-router-dom"
 import NotFoundPage from "./NotFoundPage"
-import NavBarUser from "../components/userComponents/NavBarUser"
 import BookReserveContent from "../components/userComponents/BookReserveContent"
 
 import styles from "../styles/userStyles/userPage.module.css"
 import { AlertProvider } from "../hooks/userHooks/AlertContext"
+import NavBar from "../components/general/NavBar"
 
 function UserPage({sectionSelected}) {
   //hook alert
 
     return (
       <> 
-        <NavBarUser  className={styles.content_container} sectionSelected={sectionSelected}/>
+        <NavBar className={styles.content_container} sectionSelected={sectionSelected} rol="bedel"/>
         <main className={styles.content_container}>
         <AlertProvider>
         <Routes>

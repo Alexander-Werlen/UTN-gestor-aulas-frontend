@@ -1,60 +1,84 @@
-:root {
-    --input-height: 40px;
-}
 
-.buscar_bedel_input_container {
+.form_Buscar_Bedel {
+    width: 100%;
     display: flex;
-    flex-wrap: nowrap;
-}
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
 
-.buscar_bedel_input_section {
-    margin-top:40px;
+  
+  .input_section {
     width: 250px;
     height: auto;
+    display: block;
+    position: relative;
 }
 
-.buscar_bedel_input_section input[type="submit"] {
-    margin-top:30px;
-}
-
-.input_section_descriptor {
-    font-size: 20px;
-}
-
-.buscar_bedel_input_section input, select {
-    width: 80%;
+  
+  .form_Buscar_Bedel input, .form_Buscar_Bedel select {
+    width: 200px;
+    display: block;
     height: var(--input-height);
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 4px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid var(--primary-light);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 20px;
+    margin-top: 0px;
 }
 
-.buscar_bedel_input_section button {
+.form_Buscar_Bedel label {
+    font-size: 20px;
+}
+
+.form_Buscar_Bedel button {
     width: 30%;
     height: var(--input-height);
     padding-top: 8px;
     padding-bottom: 8px;
-    padding-left: 4px;
-    margin: 8px 0;
-    margin-top:30px;
+    margin-top: 22px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 20px;
+    cursor: pointer;
 }
 
-.buscar_bedel_input_section button:hover {
-    background-color: #d8d8d8;
-    cursor: pointer;
-}
-.buscar_bedel_input_section input[type="submit"]:hover {
-    background-color: #d8d8d8;
-    cursor: pointer;
-}
+  
+
+  
+  .input_text:focus, .select_text:focus {
+    border: 2px solid var(--primary-light); /* Color del borde al enfocar */
+    outline: none; /* Eliminar el borde de enfoque predeterminado */
+  }
+  
+  .button_Section {
+    
+    width: 20rem; /* Ancho de la sección de botones */
+    display: flex;
+    gap: 2rem; /* Espacio entre los botones */
+  }
+
+  
+  .button_Buscar {
+    background-color: var(--secondary-main); /* Color de fondo del botón de buscar */
+    color: white; /* Color del texto del botón */
+  }
+  
+  .button_Buscar:hover ,.button_Buscar:focus {
+    background-color:  var(--secondary-dark); /* Color de fondo al pasar el ratón */
+    }
+  
+  .button_Limpiar {
+    background-color: var(--gray-main); /* Color de fondo del botón de limpiar */
+    color: white; /* Color del texto del botón */
+    border: 0; /* Eliminar el borde del botón */
+  } 
+  
+  .button_Limpiar:hover  ,.button_Limpiar:focus{
+    background-color: var(--gray-dark); /* Color de fondo al pasar el ratón */
+    color: white; /* Color del texto al pasar el ratón */
+  }

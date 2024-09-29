@@ -1,3 +1,4 @@
+
 .overlay {
     position: fixed;
     top: 0;
@@ -20,6 +21,7 @@
     height: auto;
     margin: 50px auto;
     background: #f2f2f2;
+    border: var(--primary-main) 2px solid;
     border-radius: 5px;
     position: relative;
     padding-bottom: 8px;
@@ -49,6 +51,12 @@
     margin-top:20px;
 }
 
+.content_container label {
+    display: block;
+    margin-top: 8px;
+}
+
+
 .content_container input, .content_container select {
     width: 100%;
     height: 30px;
@@ -63,12 +71,28 @@
     background-color: #ffffff;
 }
 
+/* Focus input */
+.content_container input:focus, .content_container select:focus {
+    outline: 2px solid var(--primary-light);
+}
+
+.modified_field {
+    outline: 2px solid var(--info-main) !important;
+}
+
+
 .content_container select {
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+.disabled_input {
+    background-color: var(--gray-light) !important;
+    color: var(--gray-dark) !important;
+    
 }
 
 .content_container h4 {
@@ -118,19 +142,21 @@
 }
 
 .btn_section_container .modificar_btn {
-    background-color: rgb(84, 157, 216);
+    background-color: var( --secondary-main);
+    color: white;
 }
 
 .btn_section_container .cerrar_btn {
-    background-color: rgb(203, 199, 199);
+    background-color:var(--gray-main);
+    color: white;
 }
 
 .btn_section_container .modificar_btn:hover {
-    background-color: rgb(67, 127, 175);
+    background-color: var(--secondary-dark);
     cursor: pointer;
 }
 
 .btn_section_container .cerrar_btn:hover {
-    background-color: rgb(156, 152, 152);
+    background-color: var(--gray-dark);
     cursor: pointer;
 }

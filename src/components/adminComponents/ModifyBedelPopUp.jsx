@@ -46,22 +46,36 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
                 </div>
                 <hr/>
                 <div className={styles.content_container}>
-                    <h4>Apellido</h4>
-                    <input type="text" required value={apellido} onChange={(e)=>setApellido(e.target.value)}></input>
-                    <h4>Nombre</h4>
-                    <input type="text" required value={nombre} onChange={(e)=>setNombre(e.target.value)}></input>
-                    <h4>Identificador</h4>
-                    <input type="text" required value={bedelData.identificador} disabled></input>
-                    <h4>Turno</h4>
-                    <select value={turno} onChange={(e)=>setTurno(e.target.value)}>
+                    <label>Apellido
+                    <input
+                    className={ bedelData.apellido !== apellido ? styles.modified_field : ""}
+                     type="text" required value={apellido} onChange={(e)=>setApellido(e.target.value)}></input>
+                    </label>
+                    <label>Nombre
+                    <input
+                    className={ bedelData.nombre !== nombre ? styles.modified_field : ""}
+                     type="text" required value={nombre} onChange={(e)=>setNombre(e.target.value)}></input>
+                    </label>
+                    <label>Identificador
+                    <input 
+                    className={styles.disabled_input}
+                    type="text" required value={bedelData.identificador} disabled></input>
+                    </label>
+                    <label>Turno
+                    <select 
+                    className={ bedelData.turno !== turno ? styles.modified_field : ""}
+                    value={turno} onChange={(e)=>setTurno(e.target.value)}>
                         <option value="mañana">Mañana</option>
                         <option value="tarde">Tarde</option>
                         <option value="noche">Noche</option>
                     </select>
-                    <h4>Nueva contraseña</h4>
+                    </label>
+                    <label>Contraseña
                     <input type="password" value={contraseña} placeholder="Sin modificar" onChange={(e)=>setContraseña(e.target.value)}></input>
-                    <h4>Confirmar nueva contraseña</h4>
+                    </label>
+                    <label>Confirmar contraseña
                     <input type="password" value={contraseñaConfirmacion} placeholder="Sin modificar" onChange={(e)=>setContraseñaConfirmacion(e.target.value)}></input>
+                    </label>
                     <div className={styles.warning_msg}>
                         <p>La contraseña debe contener al menos un dígito.</p>
                         <p>Debe contener al menos una letra mayúscula</p>
