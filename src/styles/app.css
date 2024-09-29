@@ -7,9 +7,11 @@
     --secondary-main: #267255;
     --secondary-dark: #084d1f;
     --secondary-light: #4caf50;
+    --error-text: #fff;
     --error-main: #f44336;
     --error-dark: #ba000d;
     --error-light: #ff7961;
+    --warning-text: #fff;
     --warning-main: #ff9800;
     --warning-dark: #f57c00;
     --warning-light: #ffb74d;
@@ -19,6 +21,7 @@
     --success-main: #4caf50;
     --success-dark: #388e3c;
     --success-light: #81c784;
+    --succes-stext: #fff;
     --gray-main: #7d7d7d;
     --gray-dark: #606060;
     --gray-light: #cfcfcf;

@@ -1,9 +1,16 @@
-import axios from "axios"
 
 import styles from "../../styles/userStyles/choosingClassRooms.module.css"
+import { useContext } from "react"
+import { AlertContext } from "../../hooks/userHooks/AlertContext"
+import reservaService from "../../services/reservaService"
+
 
 
 function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, setDaysReserved, setIsChoosingAulas}) {
+
+    //alert context
+    const {openAlert} = useContext(AlertContext)
+    
 
     let days = []
     for (let i = 0; i < daysReserved.length; i++) {
@@ -21,14 +28,6 @@ function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const frecuenciaByTipoReserva = {
-            "Anual": "anual",
-            "1er Cuatrimestre": "cuatrimestre_1",
-            "2do Cuatrimestre": "cuatrimestre_2",
-            "Esporadica": "esporadica"
-        }
-
-        const url = (information.tipo_reserva=="Esporadica") ? "http://localhost:3000/reservas/esporadica" : "http://localhost:3000/reservas/periodica"
 
         const data = {
             bedel_id: "admin",
@@ -48,28 +47,24 @@ function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, 
         }
 
         if(!(information.tipo_reserva=="Esporadica")) {
-            data["frecuencia"] = frecuenciaByTipoReserva[information.tipo_reserva]
+
+            data.frecuencia = information.tipo_reserva
         }
 
-        axios({
-            method: 'post',
-            url: url,
-            data: data
-        }).then(response => {
+        reservaService.postReserva(data, information.tipo_reserva)
+        .then(response => {
             //### Avisar exito
             setDaysReserved([{day: "", start: "", duration: ""}])
-            alert("Reserva exitosa")
+            openAlert("Reserva realizada con éxito", "success", "center", "bottom", 5000)
             console.log(response)
         }).catch(e => {
             //### Avisar error
-            alert("No se pudo realizar la reserva")
+            openAlert("Error al realizar la reserva", "error", "center", "bottom", 5000)
             console.log(data)
             console.log(e)
         }).finally(() => {
             setIsChoosingAulas(false)
         })
-
-
     }
 
     const handleCancel = () => {
@@ -128,6 +123,7 @@ function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, 
             </div>
         </div>
         </form>
+
     )
 }
 

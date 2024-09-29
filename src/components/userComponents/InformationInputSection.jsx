@@ -97,9 +97,9 @@ function InformationInputSection({
               onInput={(e) => e.target.setCustomValidity("")}
             >
               <option value="" disabled>Seleccionar...</option>
-              <option value="Anual">Anual</option>
-              <option value="1er Cuatrimestre">1er Cuatrimestre</option>
-              <option value="2do Cuatrimestre">2do Cuatrimestre</option>
+              <option value="anual">Anual</option>
+              <option value="cuatrimestre_1">1er Cuatrimestre</option>
+              <option value="cuatrimestre_2">2do Cuatrimestre</option>
               <option value="Esporadica">Esporadica</option>
             </select>
           </div>
