@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react"
 import DeleteBedelPopUp from "./DeleteBedelPopUp"
 import ModifyBedelPopUp from "./ModifyBedelPopUp"
-import axios from 'axios'
-
 import styles from "../../styles/adminStyles/bedelsResultsTable.module.css"
+import bedelService from "../../services/bedelService"
 
 function BedelResultsTable({apellidoFilter, turnoFilter}) {
 
@@ -21,10 +20,10 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
     const [alterBedelData, setAlterBedelData] = useState(defaultAlterBedelData)
 
     useEffect(() => {
-        axios.get("http://localhost:3000/bedeles").then(response => {
-            return response.data
-        }).then(bedeles => {
-            let datosBedeles = bedeles.map(bedel => {
+        bedelService.getAllBedeles()
+       .then(bedeles => {
+        console.log(bedeles)
+            let datosBedeles = bedeles.data.map(bedel => {
                 return {
                     apellido: bedel.apellido,
                     nombre: bedel.nombre,
@@ -41,11 +40,8 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
 
     const confirmDeletion = (identificador) => {
         //###send API deletion 
-
-        axios({
-            method: 'delete',
-            url: `http://localhost:3000/bedeles/${identificador}`,
-        }).then(response => {
+        bedelService.deleteBedel(identificador)
+        .then(response => {
             alert("El bedel fue eliminado con exito")
             console.log(response)
         }).catch(e => {
@@ -59,16 +55,15 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
 
     const confirmModification = (modifiedBedel) => {
         //### send API modification
-        axios({
-            method: 'put',
-            url: `http://localhost:3000/bedeles/${modifiedBedel.identificador}`,
-            data: {
-                apellido: modifiedBedel.apellido,
-                nombre: modifiedBedel.nombre,
-                turno: modifiedBedel.turno,
-                contraseña: modifiedBedel.contraseña
-            }
-        }).then(response => {
+        const id = modifiedBedel.identificador
+        const data = {
+            apellido: modifiedBedel.apellido,
+            nombre: modifiedBedel.nombre,
+            turno: modifiedBedel.turno,
+            contraseña: modifiedBedel.password
+        }
+        bedelService.modifyBedel(id, data)
+       .then(response => {
             alert("El bedel fue modificado con exito")
             console.log(response)
         }).catch(e => {
