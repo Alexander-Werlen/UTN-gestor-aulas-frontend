@@ -10,11 +10,21 @@
 .table td , .table th {
     width: 20%;
     height: 40px;
-    border: 1px solid #000000;
 
     text-align: center;
     padding: 0px;
 }
+
+.table td {
+    width: 20%;
+    height: 40px;
+    border: 1px solid var(--primary-light);
+
+    text-align: center;
+    padding: 0px;
+}
+
+
 
 .table th {
     background-color: var(--primary-dark);
@@ -25,6 +35,8 @@
     
 }
 
+
+
 .table select {
     width: 100%;
     height: 100%;
@@ -33,6 +45,11 @@
     text-align: center;
     text-indent: 1px;
     text-overflow: '';
+    font-size: medium;
+
+    
+    border: none;
+    outline: none;
     /* for Firefox */
     -moz-appearance: none;
     /* for Chrome */
@@ -50,6 +67,10 @@
     text-align: center;
     text-indent: 10px;
     text-overflow: '';
+}
+
+.table select:focus {
+   border: 1px solid var(--secondary-main);
 }
 
 .table select::-ms-expand {
@@ -87,6 +108,9 @@
     font-size: small;
     cursor: pointer;
     transition: background-color 100ms;
+    font-size: 15px;
+    border: none ;
+    outline: none;  
 }
 
 .add_btn:hover {
@@ -101,7 +125,7 @@
     border: 2px solid var(--secondary-main);
     border-radius: 6px;
     box-sizing: border-box;
-    font-size: 20px;
+    font-size: medium;
     cursor: pointer;
     background-color: white;
     color: var(--secondary-main);

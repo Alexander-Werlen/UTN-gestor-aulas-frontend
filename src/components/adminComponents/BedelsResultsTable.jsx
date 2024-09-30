@@ -3,10 +3,19 @@ import DeleteBedelPopUp from "./DeleteBedelPopUp"
 import ModifyBedelPopUp from "./ModifyBedelPopUp"
 import styles from "../../styles/adminStyles/bedelsResultsTable.module.css"
 import bedelService from "../../services/bedelService"
+import Alert from "../general/Alert"
 
 function BedelResultsTable({apellidoFilter, turnoFilter}) {
 
     const [bedels, setBedels] = useState([])
+    const [message, setMessage] = useState({
+        open: false,
+        text: "",
+        severity: "warning",
+        positionX: "center",
+        positionY: "bottom",
+        autoCloseDuration: undefined
+    })
 
     const defaultAlterBedelData = {
         showDeletePopUp: false,
@@ -42,10 +51,24 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
         //###send API deletion 
         bedelService.deleteBedel(identificador)
         .then(response => {
-            alert("El bedel fue eliminado con exito")
+            setMessage({
+                text: "El bedel fue eliminado con exito",
+                severity: "success",
+                open: true,
+                positionX: "center",
+                positionY: "bottom",
+                autoCloseDuration: 5000
+            })
             console.log(response)
         }).catch(e => {
-            alert("El bedel no se pudo eliminar")
+            setMessage({
+                text: "El bedel no se pudo eliminar",
+                severity: "error",
+                open: true,
+                positionX: "center",
+                positionY: "bottom",
+                autoCloseDuration: 5000
+            })
             console.log(e)
         })
 
@@ -156,6 +179,7 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
         </div>
         {alterBedelData.showDeletePopUp &&  <DeleteBedelPopUp getAlterBedelData={getAlterBedelData} confirmDeletion={confirmDeletion} closePopUp={closePopUp}/>}
         {alterBedelData.showModifyPopUp &&  <ModifyBedelPopUp getAlterBedelData={getAlterBedelData} confirmModification={confirmModification} closePopUp={closePopUp}/>}
+                    {message.open && <Alert severity={message.severity} text={message.text} positionX={message.positionX} positionY={message.positionY} onClose={ () => setMessage({open: false})} autoCloseDuration={message.autoCloseDuration}/>}
         </>
     )
 }

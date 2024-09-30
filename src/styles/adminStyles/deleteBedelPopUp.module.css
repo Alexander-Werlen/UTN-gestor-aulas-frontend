@@ -5,6 +5,7 @@
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.7);
+    border: 2px solid var(--primary-main);
     opacity: 1;
     z-index: 11;
     overflow: auto;
@@ -63,16 +64,21 @@
     background-color: #ffffff;
 }
 
-.content_container h4 {
+.content_container label {
+    margin-top: 15px;
+}
+
+label {
+    display: block;
     margin-top: 8px;
 }
 
 .warning_msg{
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .warning_msg p{
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .btn_section_container {
@@ -96,19 +102,21 @@
 }
 
 .btn_section_container .eliminar_btn {
-    background-color: rgb(230, 94, 94);
+    background-color: var(--error-main);
+    color: white;
 }
 
 .btn_section_container .cerrar_btn {
-    background-color: rgb(203, 199, 199);
+    background-color: var(--gray-main);
+    color: white;
 }
 
 .btn_section_container .eliminar_btn:hover {
-    background-color: rgb(194, 80, 80);
+    background-color: var(--error-dark);
     cursor: pointer;
 }
 
 .btn_section_container .cerrar_btn:hover {
-    background-color: rgb(156, 152, 152);
+    background-color: var(--gray-dark);
     cursor: pointer;
 }

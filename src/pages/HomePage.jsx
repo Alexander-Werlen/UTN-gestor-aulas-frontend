@@ -46,7 +46,7 @@ const HomePage = () => {
         <label>
           Rol:
           <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="user">Usuario</option>
+            <option value="user">Bedel</option>
             <option value="admin">Administrador</option>
           </select>
         </label>

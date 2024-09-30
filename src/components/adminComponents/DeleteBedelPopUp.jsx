@@ -14,12 +14,15 @@ function DeleteBedelPopUp({getAlterBedelData, confirmDeletion, closePopUp}) {
                 </div>
                 <hr/>
                 <div className={styles.content_container}>
-                    <h4>Apellido</h4>
+                    <label>Apellido
                     <input type="text" value={bedelData.apellido} disabled></input>
-                    <h4>Nombre</h4>
+                    </label>
+                    <label>Nombre
                     <input type="text" value={bedelData.nombre} disabled></input>
-                    <h4>Turno</h4>
+                    </label>
+                    <label>Turno
                     <input type="text" value={bedelData.turno} disabled></input>
+                    </label>
                     <div className={styles.warning_msg}>
                         <p>Estás seguro que quieres <b>eliminar</b> al bedel <b>{bedelData.apellido+" "+bedelData.nombre}</b> del turno <b>{bedelData.turno}</b>?</p>
                         <p>Se <b>PERDERÁ EL USUARIO</b> permanentemente.</p>
