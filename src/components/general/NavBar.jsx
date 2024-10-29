@@ -35,7 +35,6 @@ function NavBar({ sectionSelected,  rol}) {
                 <nav>
                     <ul className={styles.nav_bar_list}>
                         {rol === "bedel" &&
-                        
                             <>
                             <li className={styles.nav_bar_list_item}>
                             <Link
@@ -43,9 +42,7 @@ function NavBar({ sectionSelected,  rol}) {
                                 className={`${styles.nav_bar_section} ${sectionSelected === "book" ? styles.active : ""
                                     }`}
                             >
-                                REGISTRAR
-                                <br />
-                                RESERVA
+                                REGISTRAR RESERVA
                             </Link>
                         </li>
                         <li className={styles.nav_bar_list_item}>
@@ -54,9 +51,7 @@ function NavBar({ sectionSelected,  rol}) {
                                 className={`${styles.nav_bar_section} ${sectionSelected === "classroom" ? styles.active : ""
                                     }`}
                             >
-                                RESERVAS
-                                <br />
-                                EN AULA
+                                RESERVAS EN AULA
                             </Link>
                         </li>
                         <li className={styles.nav_bar_list_item}>
@@ -65,9 +60,7 @@ function NavBar({ sectionSelected,  rol}) {
                                 className={`${styles.nav_bar_section} ${sectionSelected === "day" ? styles.active : ""
                                     }`}
                             >
-                                RESERVAS
-                                <br />
-                                EN DÍA
+                                RESERVAS EN DÍA
                             </Link>
                         </li>
                         <li className={styles.nav_bar_list_item}>
@@ -76,9 +69,7 @@ function NavBar({ sectionSelected,  rol}) {
                                 className={`${styles.nav_bar_section} ${sectionSelected === "subject" ? styles.active : ""
                                     }`}
                             >
-                                RESERVAS
-                                <br />
-                                EN CURSO
+                                RESERVAS EN CURSO
                             </Link>
                         </li>
                             </>
@@ -89,10 +80,8 @@ function NavBar({ sectionSelected,  rol}) {
                            <>
                             <li className={styles.nav_bar_list_item}>
                             <Link to="/admin/bedel/search" className={`${styles.nav_bar_section} ${(sectionSelected == "search" ? styles.active : '')}`}>
-                                <p className={styles.nav_bar_section}>
-                                    BUSCAR
-                                    <br />
-                                    BEDEL
+                                <p>
+                                    BUSCAR BEDEL
                                 </p>
 
                             </Link>
@@ -101,20 +90,14 @@ function NavBar({ sectionSelected,  rol}) {
                         <li className={styles.nav_bar_list_item}>
 
                             <Link to="/admin/bedel/register" className={`${styles.nav_bar_section} ${(sectionSelected == "register" ? styles.active : '')}`}>
-                                <p className={styles.nav_bar_section}>
-                                    REGISTRAR
-                                    <br />
-                                    BEDEL
+                                <p>
+                                    REGISTRAR BEDEL
                                 </p>
                             </Link>
                         </li>
 
                            </>
                         }
-
-                        
-                       
-
                     </ul>
                 </nav>
             </div>
