@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import validatePassword from "../../utils/passwordValidation"
 
 import styles from "../../styles/adminStyles/registrarBedelContent.module.css"
 import bedelService from "../../services/bedelService"
 import Alert from "../general/Alert"
+import axios from "axios"
 
 function RegistrarBedelContent() {
 
@@ -13,6 +14,13 @@ function RegistrarBedelContent() {
   const [turno, setTurno] = useState("")
   const [contraseña, setContraseña] = useState("")
   const [contraseñaConfirmacion, setContraseñaConfirmacion] = useState("")
+  const [restriccionesContraseña, setRestriccionesContraseña] = useState([])
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/validaciones/password").then(r => {
+      setRestriccionesContraseña(r.data)
+    }).catch(e => console.log(e))
+  }, [])
 
   const [message, setMessage] = useState({
     open: false,
@@ -61,10 +69,10 @@ function RegistrarBedelContent() {
       return;
     }
     const bedelData = packInputData()
-    resetInputs()
     //PUT API call
     bedelService.registerBedel(bedelData)
-    .then(response => {
+    .then(() => {
+      resetInputs()
       //### Avisar exito
       setMessage({
         open: true,
@@ -74,12 +82,13 @@ function RegistrarBedelContent() {
         positionY: "bottom",
         autoCloseDuration: 5000
       })
-      console.log(response)
     }).catch(e => {
       //### Avisar error
+      let error = e.response.data.error
+      if (error.constructor === Array) error = error[0]
       setMessage({
         open: true,
-        text: "No se pudo registrar el bedel",
+        text: error,
         severity: "error",
         positionX: "center",
         positionY: "bottom",
@@ -115,15 +124,12 @@ function RegistrarBedelContent() {
             </select>
           </label>
           <label>Contraseña
-            <input type="password" required value={contraseña} minLength={8} onChange={(e) => setContraseña(e.target.value)}></input>
+            <input type="password" required value={contraseña} onChange={(e) => setContraseña(e.target.value)}></input>
           </label>
           <label>Confirmar contraseña
             <input type="password" required value={contraseñaConfirmacion} onChange={(e) => setContraseñaConfirmacion(e.target.value)}></input>
             <div className={styles.warning_msg}>
-              <p>La contraseña debe contener al menos un dígito.</p>
-              <p>Debe contener al menos una letra mayúscula</p>
-              <p>Debe contener signos especiales (@#$%&*)</p>
-              <p>Debe tener por lo menos 8 caracteres</p>
+              {restriccionesContraseña.map(restriccion => <p key={restriccion}>{restriccion}</p>)}
             </div>
           </label>
           <div className={styles.btn_section_container}>
