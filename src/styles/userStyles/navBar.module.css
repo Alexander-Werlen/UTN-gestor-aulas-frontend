@@ -107,10 +107,11 @@
     padding: 0 15px;
     height: 100%;
     width: 100%;
+    background-color: var(--primary-light);
 }
 
 .nav_bar_section.active {
-    background-color: var(--primary-dark) !important;
+    background-color: var(--primary-dark);
     color: #fff;
     /* No cambiar el puntero */
     cursor: default;
@@ -118,11 +119,11 @@
 
 /* hover and focus same styles */
 .nav_bar_section:hover {
-    background-color: var(--primary-light);
+    background-color: var(--primary-dark);
 }
 
-.nav_bar_section:focus {
-    background-color: var(--primary-light);
+.nav_bar_section:focus-visible {
+    background-color: var(--primary-very-light);
 }       
 
 
@@ -133,4 +134,9 @@
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.profile_icon_button {
+    background-color: transparent;
+    border: none;
 }

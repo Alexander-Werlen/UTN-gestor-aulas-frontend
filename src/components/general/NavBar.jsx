@@ -17,10 +17,11 @@ function NavBar({ sectionSelected,  rol}) {
                 <section className={styles.app_section}>
                     <h1 className={styles.app_name}>Gestión de Aulas</h1>
                     <div className={styles.profile_icon_container}>
-                        <FaUserCircle
+                        <button className={styles.profile_icon_button} onClick={toggleDropdown}>
+                            <FaUserCircle
                             className={styles.profile_icon}
-                            onClick={toggleDropdown}
-                        />
+                            />
+                        </button>
                         {dropdownVisible && (
                             <ul className={styles.dropdown_menu}>
                                 <li className={styles.dropdown_item}>
