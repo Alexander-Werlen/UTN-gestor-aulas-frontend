@@ -16,6 +16,19 @@ function RegistrarBedelContent() {
   const [contraseñaConfirmacion, setContraseñaConfirmacion] = useState("")
   const [restriccionesContraseña, setRestriccionesContraseña] = useState([])
 
+  const [showPassword, setShowPassword] = useState(false)
+
+  const openEyeSVG =<svg onClick={() => setShowPassword(!showPassword)} style={{cursor: "pointer"}} className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+    <path stroke="currentColor" strokeWidth="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+    <path stroke="currentColor" strokeWidth="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+  </svg>
+
+  const closedEyeSVG = <svg onClick={() => setShowPassword(!showPassword)} style={{cursor: "pointer"}} className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+  </svg>
+
+
+
   useEffect(() => {
     axios.get("http://localhost:3000/validaciones/password").then(r => {
       setRestriccionesContraseña(r.data)
@@ -124,14 +137,17 @@ function RegistrarBedelContent() {
             </select>
           </label>
           <label>Contraseña
-            <input type="password" required value={contraseña} onChange={(e) => setContraseña(e.target.value)}></input>
           </label>
+          <div className={styles.password_container}>
+            <input type={showPassword ? "text" : "password"} required value={contraseña} onChange={(e) => setContraseña(e.target.value)}></input>
+            <span className={styles.passwordVisibilityTogglerHolder}>{!showPassword ? openEyeSVG : closedEyeSVG}</span>
+          </div>
           <label>Confirmar contraseña
-            <input type="password" required value={contraseñaConfirmacion} onChange={(e) => setContraseñaConfirmacion(e.target.value)}></input>
-            <div className={styles.warning_msg}>
-              {restriccionesContraseña.map(restriccion => <p key={restriccion}>{restriccion}</p>)}
-            </div>
           </label>
+          <input type={showPassword ? "text" : "password"} required value={contraseñaConfirmacion} onChange={(e) => setContraseñaConfirmacion(e.target.value)}></input>
+          <div className={styles.warning_msg}>
+            {restriccionesContraseña.map(restriccion => <p key={restriccion}>{restriccion}</p>)}
+          </div>
           <div className={styles.btn_section_container}>
             <button type="submit"  className={styles.registrar_btn}>
               Registrar
@@ -143,7 +159,7 @@ function RegistrarBedelContent() {
         </div>
 
       </form>
-      {message.open && <Alert severity={message.severity} text={message.text} positionX={message.positionX} positionY={message.positionY} onClose={ () => setMessage({open: false})}
+      {message.open && <Alert severity={message.severity} text={message.text} filled={true} positionX={message.positionX} positionY={message.positionY} onClose={ () => setMessage({open: false})}
       autoCloseDuration={message.autoCloseDuration} />}
     </div>
 

@@ -84,7 +84,7 @@
 }
 
 .btn_section_container {
-    width: 60%;
+    width: 100%;
     margin: 20px auto;
     display: flex;
     justify-content: space-between;
@@ -135,4 +135,14 @@
 .btn_section_container .limpiar_btn:hover {
     background-color: var(--gray-dark);
     cursor: pointer;
+}
+
+.passwordVisibilityTogglerHolder {
+    position: absolute;
+    top:5px;
+    right:5px;
+}
+
+.password_container {
+    position: relative;
 }
