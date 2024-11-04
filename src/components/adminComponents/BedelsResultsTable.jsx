@@ -120,7 +120,7 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
         })
     }
 
-    const filteredBedels = bedels.filter((bedel) => (apellidoFilter=="" || bedel.apellido.toLowerCase()==apellidoFilter.toLowerCase()) && (turnoFilter=="todos" || bedel.turno==turnoFilter))
+    const filteredBedels = bedels.filter((bedel) => (bedel.apellido.toLowerCase().startsWith(apellidoFilter.toLowerCase()) && (turnoFilter=="todos" || bedel.turno==turnoFilter)))
 
     return (
         <>
