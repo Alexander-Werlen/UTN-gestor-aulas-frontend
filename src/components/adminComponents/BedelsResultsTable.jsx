@@ -3,8 +3,9 @@ import DeleteBedelPopUp from "./DeleteBedelPopUp"
 import ModifyBedelPopUp from "./ModifyBedelPopUp"
 import styles from "../../styles/adminStyles/bedelsResultsTable.module.css"
 import bedelService from "../../services/bedelService"
+import Alert from "../general/Alert"
 
-function BedelResultsTable({apellidoFilter, turnoFilter}) {
+function BedelResultsTable({ apellidoFilter, turnoFilter }) {
 
     const [bedels, setBedels] = useState([])
 
@@ -19,37 +20,62 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
 
     const [alterBedelData, setAlterBedelData] = useState(defaultAlterBedelData)
 
+    const [message, setMessage] = useState({
+        open: false,
+        text: "",
+        severity: "warning",
+        positionX: "center",
+        positionY: "bottom",
+        autoCloseDuration: undefined
+    })
+
+
     useEffect(() => {
         bedelService.getBedelByFilter(apellidoFilter, turnoFilter)
-       .then(bedeles => {
-        console.log(bedeles)
-            let datosBedeles = bedeles.data.map(bedel => {
-                return {
-                    apellido: bedel.apellido,
-                    nombre: bedel.nombre,
-                    turno: bedel.turno,
-                    identificador: bedel.id
-                }
+            .then(bedeles => {
+                console.log(bedeles)
+                let datosBedeles = bedeles.data.map(bedel => {
+                    return {
+                        apellido: bedel.apellido,
+                        nombre: bedel.nombre,
+                        turno: bedel.turno,
+                        identificador: bedel.id
+                    }
+                })
+                setBedels(datosBedeles)
+            }).catch(e => {
+                console.log(e)
             })
-            setBedels(datosBedeles)
-        }).catch(e => {
-            console.log(e)
-        })
     }, [apellidoFilter, turnoFilter])
 
 
     const confirmDeletion = (identificador) => {
         //###send API deletion 
         bedelService.deleteBedel(identificador)
-        .then(response => {
-            alert("El bedel fue eliminado con exito")
-            console.log(response)
-        }).catch(e => {
-            alert("El bedel no se pudo eliminar")
-            console.log(e)
-        })
+            .then(response => {
+                setMessage({
+                    open: true,
+                    text: "Bedel eliminado correctamente",
+                    severity: "success",
+                    positionX: "center",
+                    positionY: "bottom",
+                    autoCloseDuration: 8000
+                })
 
-        setBedels(bedels.filter((bedel) => bedel.identificador!==identificador))
+
+            }).catch(e => {
+                setMessage({
+                    open: true,
+                    text: "Error al eliminar el bedel",
+                    severity: "error",
+                    positionX: "center",
+                    positionY: "bottom",
+                    autoCloseDuration: 8000
+                })
+
+            })
+
+        setBedels(bedels.filter((bedel) => bedel.identificador !== identificador))
         closePopUp()
     }
 
@@ -63,16 +89,28 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
             contraseña: modifiedBedel.password
         }
         bedelService.modifyBedel(id, data)
-       .then(response => {
-            alert("El bedel fue modificado con exito")
-            console.log(response)
-        }).catch(e => {
-            alert("El bedel no se pudo modificar")
-            console.log(e)
-        })
+            .then(response => {
+                setMessage({
+                    open: true,
+                    text: "Bedel modificado correctamente",
+                    severity: "success",
+                    positionX: "center",
+                    positionY: "bottom",
+                    autoCloseDuration: 8000
+                })
+            }).catch(e => {
+                setMessage({
+                    open: true,
+                    text: "Error al modificar el bedel",
+                    severity: "error",
+                    positionX: "center",
+                    positionY: "bottom",
+                    autoCloseDuration: 8000
+                })
+            })
 
         const newList = bedels.map((bedel) => {
-            if(bedel.identificador==modifiedBedel.identificador) {
+            if (bedel.identificador == modifiedBedel.identificador) {
                 return {
                     apellido: modifiedBedel.apellido,
                     nombre: modifiedBedel.nombre,
@@ -99,7 +137,7 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
     }
 
     const openDeleteBedelPopUp = (bedelSelected) => {
-        setAlterBedelData ({
+        setAlterBedelData({
             showDeletePopUp: true,
             showModifyPopUp: false,
             apellido: bedelSelected.apellido,
@@ -110,7 +148,7 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
     }
 
     const openModifyBedelPopUp = (bedelSelected) => {
-        setAlterBedelData ({
+        setAlterBedelData({
             showDeletePopUp: false,
             showModifyPopUp: true,
             apellido: bedelSelected.apellido,
@@ -120,43 +158,45 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
         })
     }
 
-    
+
 
 
     return (
         <>
-        <div className={styles.buscar_bedel_results_container}>
-        <h2 className={styles.h2}>Resultados</h2>
-        <div className={styles.table_container}>
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>ACCIONES</th>
-                        <th>APELLIDO</th>
-                        <th>NOMBRE</th>
-                        <th>TURNO</th>
-                        <th>IDENTIFICADOR</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {bedels.map(bedel =>
-                        <tr key={bedel.identificador}>
-                            <td>
-                                <button className={styles.editar_btn} onClick={()=>openModifyBedelPopUp(bedel)}>Editar</button>
-                                <button className={styles.eliminar_btn} onClick={()=>openDeleteBedelPopUp(bedel)}>Eliminar</button>
-                            </td>
-                            <td>{bedel.apellido}</td>
-                            <td>{bedel.nombre}</td>
-                            <td>{bedel.turno}</td>
-                            <td>{bedel.identificador}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
-        </div>
-        {alterBedelData.showDeletePopUp &&  <DeleteBedelPopUp getAlterBedelData={getAlterBedelData} confirmDeletion={confirmDeletion} closePopUp={closePopUp}/>}
-        {alterBedelData.showModifyPopUp &&  <ModifyBedelPopUp getAlterBedelData={getAlterBedelData} confirmModification={confirmModification} closePopUp={closePopUp}/>}
+            <div className={styles.buscar_bedel_results_container}>
+                <h2 className={styles.h2}>Resultados</h2>
+                <div className={styles.table_container}>
+                    <table className={styles.table}>
+                        <thead>
+                            <tr>
+                                <th>ACCIONES</th>
+                                <th>APELLIDO</th>
+                                <th>NOMBRE</th>
+                                <th>TURNO</th>
+                                <th>IDENTIFICADOR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {bedels.map(bedel =>
+                                <tr key={bedel.identificador}>
+                                    <td>
+                                        <button className={styles.editar_btn} onClick={() => openModifyBedelPopUp(bedel)}>Editar</button>
+                                        <button className={styles.eliminar_btn} onClick={() => openDeleteBedelPopUp(bedel)}>Eliminar</button>
+                                    </td>
+                                    <td>{bedel.apellido}</td>
+                                    <td>{bedel.nombre}</td>
+                                    <td>{bedel.turno}</td>
+                                    <td>{bedel.identificador}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {alterBedelData.showDeletePopUp && <DeleteBedelPopUp getAlterBedelData={getAlterBedelData} confirmDeletion={confirmDeletion} closePopUp={closePopUp} />}
+            {alterBedelData.showModifyPopUp && <ModifyBedelPopUp getAlterBedelData={getAlterBedelData} confirmModification={confirmModification} closePopUp={closePopUp} />}
+            {message.open && <Alert severity={message.severity} text={message.text} positionX={message.positionX} positionY={message.positionY} autoCloseDuration={message.autoCloseDuration} onClose={() => setMessage({ open: false })} />}
+
         </>
     )
 }
