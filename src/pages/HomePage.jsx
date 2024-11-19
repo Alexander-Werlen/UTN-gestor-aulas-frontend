@@ -1,25 +1,51 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import loginService from '../services/loginService';
+import Alert from '../components/general/Alert';
 import styles from "../styles/homePageStyles/homePage.module.css"; // Importa los estilos.
 
 const HomePage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('user'); // Estado para seleccionar entre usuario o administrador.
+  const [alert, setAlert] = useState({
+    open: false,
+    text: '',
+    severity: 'warning',
+    positionX: 'center',
+    positionY: 'bottom',
+    autoCloseDuration: undefined
+  });
+
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+    loginService.login({ id: username, password: password })
+      .then(response => {
+        localStorage.setItem('id', response.data.id);
+        localStorage.setItem('type', response.data.type);
+        if (response.data.type === 'Bedel') {
+          navigate('/user/reserve/book');
+        } else if (response.data.type === 'Administrador') {
+          navigate('/admin/bedel/search');
+        }
+      })
+      .catch(error => {
+        setAlert({
+          open: true,
+          text: 'Usuario o contraseña incorrectos',
+          severity: 'error',
+          positionX: 'center',
+          positionY: 'bottom',
+          autoCloseDuration: 5000
+        });
+        console.log(error);
+      })
+  }
+
+
     
-    // Lógica de autenticación simple.
-    if (role === 'user') {
-      navigate('/user/reserve/book'); // Redirigir si es usuario.
-    } else if (role === 'admin') {
-      navigate('/admin/bedel/search'); // Redirigir si es administrador.
-    } else {
-      alert('Selecciona un rol válido.');
-    }
-  };
+
 
   return (
     <main className={styles.loginContainer}>
@@ -43,18 +69,16 @@ const HomePage = () => {
             required 
           />
         </label>
-        <label>
-          Rol:
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="user">Bedel</option>
-            <option value="admin">Administrador</option>
-          </select>
-        </label>
         <button type="submit">Ingresar</button>
-        {/* Links para redirigir al usuario o administrador */}
-        {role === 'user' && <Link to="/user/reserve/book" className={styles.hiddenLink}></Link>}
-        {role === 'admin' && <Link to="/admin/bedel/search" className={styles.hiddenLink}></Link>}
       </form>
+      {alert.open && <Alert
+        text={alert.text}
+        severity={alert.severity}
+        positionX={alert.positionX}
+        positionY={alert.positionY}
+        autoCloseDuration={alert.autoCloseDuration}
+        onClose={() => setAlert({ ...alert, open: false })}
+      />}
     </main>
   );
 };

@@ -4,10 +4,10 @@ import api from "./api";
 
 const baseUrl = "validaciones/password";
 
-export const getRestriccionesContraseña =  () => {
+export const getRestriccionesContrasena =  () => {
     return api.get(baseUrl)
     
 }
 
-export default { getRestriccionesContraseña }
+export default { getRestriccionesContrasena }
 

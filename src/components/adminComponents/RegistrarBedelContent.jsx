@@ -29,7 +29,7 @@ function RegistrarBedelContent() {
 
 
   useEffect(() => {
-    validacionesPasswordService.getValidacionesPassword()
+    validacionesPasswordService.getRestriccionesContrasena()
     .then(response => {
       setRestriccionesContraseña(response.data)
     }).catch(e => {

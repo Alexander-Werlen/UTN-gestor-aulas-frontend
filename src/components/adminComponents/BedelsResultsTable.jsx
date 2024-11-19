@@ -8,8 +8,8 @@ import Alert from "../general/Alert"
 function BedelResultsTable({ apellidoFilter, turnoFilter }) {
 
     const [bedels, setBedels] = useState([])
-    //refresh bedels after deletion or modification
-    const [refresh, setRefresh] = useState(false)
+    //refreshTable bedels after deletion or modification
+    const [refreshTable, setRefreshTable] = useState(false)
     
 
 
@@ -50,7 +50,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
             }).catch(e => {
                 console.log(e)
             })
-    }, [apellidoFilter, turnoFilter, refresh ])
+    }, [apellidoFilter, turnoFilter, refreshTable ])
 
 
     const confirmDeletion = (identificador) => {
@@ -78,7 +78,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                 })
 
             })
-            setRefresh((prev) => !prev)
+            setRefreshTable((prev) => !prev)
         closePopUp()
     }
 
@@ -111,7 +111,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                     autoCloseDuration: 8000
                 })
             })
-        setRefresh((prev) => !prev)
+        setRefreshTable((prev) => !prev)
         closePopUp()
     }
 
