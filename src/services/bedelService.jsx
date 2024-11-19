@@ -8,6 +8,9 @@ export const getAllBedeles = () => {
     return api.get(baseUrl);
 }
 
+export const getBedelByFilter = (apellido, turno) => {
+    return api.get(`${baseUrl}?apellido=${apellido}&turno=${turno}`);
+}
 
 export const deleteBedel = (id) => {
     return api.delete(`${baseUrl}/${id}`);
@@ -25,4 +28,4 @@ export const modifyBedel = (id, bedelData) => {
 
 
 
-export default { getAllBedeles , deleteBedel , registerBedel , modifyBedel }
+export default { getAllBedeles , deleteBedel , registerBedel , modifyBedel , getBedelByFilter }

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"
 import validatePassword from "../../utils/passwordValidation"
-
+import validacionesPasswordService from "../../services/validacionesPasswordService"
 import styles from "../../styles/adminStyles/registrarBedelContent.module.css"
 import bedelService from "../../services/bedelService"
 import Alert from "../general/Alert"
-import axios from "axios"
 
 function RegistrarBedelContent() {
 
@@ -30,9 +29,12 @@ function RegistrarBedelContent() {
 
 
   useEffect(() => {
-    axios.get("http://localhost:3000/validaciones/password").then(r => {
-      setRestriccionesContraseña(r.data)
-    }).catch(e => console.log(e))
+    validacionesPasswordService.getValidacionesPassword()
+    .then(response => {
+      setRestriccionesContraseña(response.data)
+    }).catch(e => {
+      console.log(e)
+    })
   }, [])
 
   const [message, setMessage] = useState({
@@ -159,7 +161,7 @@ function RegistrarBedelContent() {
         </div>
 
       </form>
-      {message.open && <Alert severity={message.severity} text={message.text} filled={true} positionX={message.positionX} positionY={message.positionY} onClose={ () => setMessage({open: false})}
+      {message.open && <Alert severity={message.severity} text={message.text} positionX={message.positionX} positionY={message.positionY} onClose={ () => setMessage({open: false})}
       autoCloseDuration={message.autoCloseDuration} />}
     </div>
 

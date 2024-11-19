@@ -5,14 +5,14 @@ import styles from "../../styles/adminStyles/buscarBedelFiltros.module.css"
 function BuscarBedelFiltros({setApellido, setTurno}) {
 
   const [apellidoHolder, setApellidoHolder] = useState("")
-  const [turnoHolder, setTurnoHolder] = useState("todos")
+  const [turnoHolder, setTurnoHolder] = useState("")
   
   const resetInputs = (e) => {
     e.preventDefault()
     setApellido("")
     setApellidoHolder("")
-    setTurno("todos")
-    setTurnoHolder("todos")
+    setTurno("")
+    setTurnoHolder("")
   }
 
   const setFilters = (e) => {
@@ -47,7 +47,7 @@ function BuscarBedelFiltros({setApellido, setTurno}) {
             onChange={(e) => setTurnoHolder(e.target.value)}
             className={styles.select_text}
           >
-            <option value="todos">Todos</option>
+            <option value="">Todos</option>
             <option value="mañana">Mañana</option>
             <option value="tarde">Tarde</option>
             <option value="noche">Noche</option>

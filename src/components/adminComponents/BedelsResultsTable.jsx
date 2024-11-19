@@ -20,7 +20,7 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
     const [alterBedelData, setAlterBedelData] = useState(defaultAlterBedelData)
 
     useEffect(() => {
-        bedelService.getAllBedeles()
+        bedelService.getBedelByFilter(apellidoFilter, turnoFilter)
        .then(bedeles => {
         console.log(bedeles)
             let datosBedeles = bedeles.data.map(bedel => {
@@ -35,7 +35,7 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
         }).catch(e => {
             console.log(e)
         })
-    }, []);
+    }, [apellidoFilter, turnoFilter])
 
 
     const confirmDeletion = (identificador) => {
@@ -120,7 +120,8 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
         })
     }
 
-    const filteredBedels = bedels.filter((bedel) => (bedel.apellido.toLowerCase().startsWith(apellidoFilter.toLowerCase()) && (turnoFilter=="todos" || bedel.turno==turnoFilter)))
+    
+
 
     return (
         <>
@@ -138,7 +139,7 @@ function BedelResultsTable({apellidoFilter, turnoFilter}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredBedels.map((bedel)=>
+                    {bedels.map(bedel =>
                         <tr key={bedel.identificador}>
                             <td>
                                 <button className={styles.editar_btn} onClick={()=>openModifyBedelPopUp(bedel)}>Editar</button>

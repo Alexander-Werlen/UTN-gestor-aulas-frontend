@@ -6,7 +6,7 @@ import BuscarBedelFiltros from "./BuscarBedelFiltros";
 function BuscarBedelContent() {
 
   const [apellido, setApellido] = useState("");
-  const [turno, setTurno] = useState("todos");
+  const [turno, setTurno] = useState("");
 
   return (
     
