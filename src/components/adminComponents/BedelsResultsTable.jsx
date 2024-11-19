@@ -8,6 +8,10 @@ import Alert from "../general/Alert"
 function BedelResultsTable({ apellidoFilter, turnoFilter }) {
 
     const [bedels, setBedels] = useState([])
+    //refresh bedels after deletion or modification
+    const [refresh, setRefresh] = useState(false)
+    
+
 
     const defaultAlterBedelData = {
         showDeletePopUp: false,
@@ -46,13 +50,13 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
             }).catch(e => {
                 console.log(e)
             })
-    }, [apellidoFilter, turnoFilter])
+    }, [apellidoFilter, turnoFilter, refresh ])
 
 
     const confirmDeletion = (identificador) => {
         //###send API deletion 
         bedelService.deleteBedel(identificador)
-            .then(response => {
+            .then(() => {
                 setMessage({
                     open: true,
                     text: "Bedel eliminado correctamente",
@@ -63,7 +67,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                 })
 
 
-            }).catch(e => {
+            }).catch(() => {
                 setMessage({
                     open: true,
                     text: "Error al eliminar el bedel",
@@ -74,8 +78,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                 })
 
             })
-
-        setBedels(bedels.filter((bedel) => bedel.identificador !== identificador))
+            setRefresh((prev) => !prev)
         closePopUp()
     }
 
@@ -89,7 +92,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
             contraseña: modifiedBedel.password
         }
         bedelService.modifyBedel(id, data)
-            .then(response => {
+            .then(() => {
                 setMessage({
                     open: true,
                     text: "Bedel modificado correctamente",
@@ -98,7 +101,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                     positionY: "bottom",
                     autoCloseDuration: 8000
                 })
-            }).catch(e => {
+            }).catch( ()=> {
                 setMessage({
                     open: true,
                     text: "Error al modificar el bedel",
@@ -108,18 +111,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                     autoCloseDuration: 8000
                 })
             })
-
-        const newList = bedels.map((bedel) => {
-            if (bedel.identificador == modifiedBedel.identificador) {
-                return {
-                    apellido: modifiedBedel.apellido,
-                    nombre: modifiedBedel.nombre,
-                    turno: modifiedBedel.turno,
-                    identificador: modifiedBedel.identificador,
-                }
-            } else return bedel
-        })
-        setBedels(newList)
+        setRefresh((prev) => !prev)
         closePopUp()
     }
 
