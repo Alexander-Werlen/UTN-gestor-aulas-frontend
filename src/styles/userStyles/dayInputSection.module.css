@@ -116,3 +116,12 @@
 .day_input_h2 {
     margin-top: 20px;
 }
+
+.button_Buscar {
+    background-color: var(--secondary-main); /* Color de fondo del botón de buscar */
+    color: white; /* Color del texto del botón */
+}
+
+.button_Buscar:hover ,.button_Buscar:focus {
+    background-color:  var(--secondary-dark); /* Color de fondo al pasar el ratón */
+}

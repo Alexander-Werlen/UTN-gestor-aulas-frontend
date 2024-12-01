@@ -42,7 +42,7 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
                 <form onSubmit={(e) => tryModification(e)}>
                 <div className={styles.header_container}>
                     <span>MODIFICAR BEDEL</span>
-                    <button className={styles.close_btn} onClick={() => closePopUp()}>&#10006;</button>
+                    <button type="button" className={styles.close_btn} onClick={() => closePopUp()}>&#10006;</button>
                 </div>
                 <hr/>
                 <div className={styles.content_container}>

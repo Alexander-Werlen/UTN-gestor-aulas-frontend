@@ -211,8 +211,8 @@ function InformationInputSection({
           </div>
 
           <div className={styles.input_section}>
-          <button type="button" onClick={(e) => resetInputs(e)}>limpiar</button>
-        </div>
+          <button className={styles.button_Limpiar} type="button" onClick={(e) => resetInputs(e)}>Limpiar</button>
+          </div>
         </section>
     </fieldset>
   );

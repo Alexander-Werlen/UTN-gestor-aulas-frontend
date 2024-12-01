@@ -64,7 +64,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                     positionY: "bottom",
                     autoCloseDuration: 8000
                 })
-
+                setRefreshTable((prev) => !prev)
 
             }).catch(() => {
                 setMessage({
@@ -77,7 +77,6 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                 })
 
             })
-            setRefreshTable((prev) => !prev)
         closePopUp()
     }
 
@@ -88,7 +87,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
             apellido: modifiedBedel.apellido,
             nombre: modifiedBedel.nombre,
             turno: modifiedBedel.turno,
-            contraseña: modifiedBedel.password
+            password: modifiedBedel.password
         }
         bedelService.modifyBedel(id, data)
             .then(() => {
@@ -100,18 +99,20 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                     positionY: "bottom",
                     autoCloseDuration: 8000
                 })
-            }).catch( ()=> {
+                setRefreshTable((prev) => !prev)
+                closePopUp()
+            }).catch( (e)=> {
+                let error = e.response.data.error
+                if (error.constructor === Array) error = error[0]
                 setMessage({
                     open: true,
-                    text: "Error al modificar el bedel",
+                    text: error,
                     severity: "error",
                     positionX: "center",
                     positionY: "bottom",
                     autoCloseDuration: 8000
                 })
             })
-        setRefreshTable((prev) => !prev)
-        closePopUp()
     }
 
     const closePopUp = () => {

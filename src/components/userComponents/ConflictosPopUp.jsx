@@ -22,6 +22,7 @@ function ConflictosPopUp({closePopUp, conflictos, daysReserved}) {
                                         <thead>
                                             <tr>
                                                 <th className={styles.small_cell}>AULA</th>
+                                                <th className={styles.medium_cell}>FECHA</th>
                                                 <th className={styles.medium_cell}>HORARIO</th>
                                                 <th className={styles.medium_cell}>HORAS SUPERPUESTAS</th>
                                                 <th className={styles.medium_cell}>DOCENTE</th>
@@ -33,6 +34,7 @@ function ConflictosPopUp({closePopUp, conflictos, daysReserved}) {
                                             {conflictos[idx].map((c)=>
                                                 <tr key={c.aula}>
                                                 <td className={styles.small_cell}>{c.aula}</td>
+                                                <td className={styles.medium_cell}>{c.fecha}</td>
                                                 <td className={styles.medium_cell}>{c.horario}</td>
                                                 <td className={styles.medium_cell}>{c.superposicion}</td>
                                                 <td className={styles.medium_cell}>{c.docente}</td>
