@@ -2,8 +2,6 @@
 import styles from "../../styles/userStyles/conflictosPopUp.module.css"
 
 function ConflictosPopUp({closePopUp, conflictos, daysReserved}) {
-    console.log(conflictos)
-    console.log(daysReserved)
     return (
         <div className={styles.overlay}>
             <div className={styles.popup_container}>
@@ -33,7 +31,7 @@ function ConflictosPopUp({closePopUp, conflictos, daysReserved}) {
                                         </thead>
                                         <tbody>
                                             {conflictos[idx].map((c)=>
-                                                <tr key={c.curso}>
+                                                <tr key={c.aula}>
                                                 <td className={styles.small_cell}>{c.aula}</td>
                                                 <td className={styles.medium_cell}>{c.horario}</td>
                                                 <td className={styles.medium_cell}>{c.superposicion}</td>

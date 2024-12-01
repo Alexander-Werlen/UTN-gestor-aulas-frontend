@@ -24,7 +24,7 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
 
         const apariciones = daysReserved.filter((d,idx) => d.day == modifiedDay.day && idx!=idxModified ).length
         if(apariciones>0){
-            alert("La fecha ya fue utilizada")
+            alert("La fecha ya fue utilizada") //#TODO cambiar a alerta nueva
             return
         }
         setDaysReserved(daysReserved.map((dayReserved, idx) => {
@@ -117,7 +117,7 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
                                             .map((duration) => <option key={duration} value={duration}>{duration}</option>)
                                             }
                                         </select>
-                                        <button className={styles.delete_day_btn_container} onClick={(e) => deleteDay(e, idx)} hidden={daysReserved.length == 1}>&#10006;</button>
+                                        <button type="button" className={styles.delete_day_btn_container} onClick={(e) => deleteDay(e, idx)} hidden={daysReserved.length == 1}>&#10006;</button>
                                     </div>
                                 </td>
                             </tr>
@@ -125,7 +125,7 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
                         )}
                     </tbody>
                 </table>
-                <button className={styles.add_btn} onClick={(e) => addDay(e)} disabled={daysReserved.length >= 7 && !(information.tipo_reserva.toLowerCase() == "esporadica")}>AGREGAR DÍA</button>
+                <button type="button" className={styles.add_btn} onClick={(e) => addDay(e)} disabled={daysReserved.length >= 7 && !(information.tipo_reserva.toLowerCase() == "esporadica")}>AGREGAR DÍA</button>
                 <input type="submit" value="Seleccionar Aulas" className={styles.sumbit_btn}></input>
             </div>
         </div>

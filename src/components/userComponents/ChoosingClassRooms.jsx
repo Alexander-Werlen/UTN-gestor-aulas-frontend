@@ -52,11 +52,10 @@ function ChoosingClassRooms({aulasDisponiblesPorDia, information, daysReserved, 
         }
 
         reservaService.postReserva(data, information.tipo_reserva)
-        .then(response => {
+        .then(() => {
             //### Avisar exito
             setDaysReserved([{day: "", start: "", duration: ""}])
             openAlert("Reserva realizada con éxito", "success", "center", "bottom", 5000)
-            console.log(response)
         }).catch(e => {
             //### Avisar error
             openAlert("Error al realizar la reserva", "error", "center", "bottom", 5000)

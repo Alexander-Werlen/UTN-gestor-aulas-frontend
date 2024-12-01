@@ -37,7 +37,6 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
     useEffect(() => {
         bedelService.getBedelByFilter(apellidoFilter, turnoFilter)
             .then(bedeles => {
-                console.log(bedeles)
                 let datosBedeles = bedeles.data.map(bedel => {
                     return {
                         apellido: bedel.apellido,
