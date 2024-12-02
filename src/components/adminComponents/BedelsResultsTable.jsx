@@ -11,7 +11,8 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
     //refreshTable bedels after deletion or modification
     const [refreshTable, setRefreshTable] = useState(false)
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc', ignorecase: true });
-
+    const [sortedColumn, setSortedColumn] = useState(null);
+    const [sortOrder, setSortOrder] = useState(null); // 'asc' or 'desc'
 
 
 
@@ -177,6 +178,9 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
     }, [bedels, sortConfig]);
 
     const handleSort = (key, ignorecase) => {
+        const newSortOrder = sortedColumn === key && sortOrder === 'asc' ? 'desc' : 'asc';
+        setSortedColumn(key);
+        setSortOrder(newSortOrder);
         setSortConfig((prevConfig) => {
             const isSameKey = prevConfig.key === key;
             const newDirection = isSameKey && prevConfig.direction === 'asc' ? 'desc' : 'asc';
@@ -196,10 +200,18 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                         <thead>
                             <tr>
                                 <th className="no-click">ACCIONES</th>
-                                <th onClick={() => handleSort('apellido', true)}>APELLIDO </th>
-                                <th onClick={() => handleSort('nombre', true)}>NOMBRE</th>
-                                <th onClick={() => handleSort('turno', false)}>TURNO</th>
-                                <th onClick={() => handleSort('identificador', false)}>IDENTIFICADOR</th>
+                                <th onClick={() => handleSort('apellido', true)}>
+                                    APELLIDO {sortedColumn === 'apellido' && (sortOrder === 'asc' ? '▲' : '▼')}
+                                </th>
+                                <th onClick={() => handleSort('nombre', true)}>
+                                    NOMBRE {sortedColumn === 'nombre' && (sortOrder === 'asc' ? '▲' : '▼')}
+                                </th>
+                                <th onClick={() => handleSort('turno', false)}>
+                                    TURNO {sortedColumn === 'turno' && (sortOrder === 'asc' ? '▲' : '▼')}
+                                </th>
+                                <th onClick={() => handleSort('identificador', false)}>
+                                    IDENTIFICADOR {sortedColumn === 'identificador' && (sortOrder === 'asc' ? '▲' : '▼')}
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
