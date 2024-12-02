@@ -71,8 +71,8 @@ function BookReserveContent() {
             setIsChoosingAulas(true)
         }).catch(e => {
             if(e.status==400){
-                if(e.response.data.error=="periodo invalido"){
-                    openAlert("No se pueden realizar reservas anuales o del primer cuatrimestre al iniciar el segundo.", "error", "center", "bottom", 5000)
+                if(e.response.data.error != undefined){
+                    openAlert(e.response.data.message, "error", "center", "bottom", 5000)
                 }
             }
             else if(e.status==409){
