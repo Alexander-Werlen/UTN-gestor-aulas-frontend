@@ -2,9 +2,12 @@
 import styles from "../../styles/userStyles/dayInputSection.module.css"
 import { addTimes } from "../../utils/addTimes"
 import getCurrentDayString from "../../utils/getCurrentDayString"
-
+import Alert from "../general/Alert"
+import { AlertContext } from "../../hooks/userHooks/AlertContext"
+import { useContext } from "react"
 function DayInputSection({ daysReserved, setDaysReserved, information }) {
 
+    const {message, closeAlert, openAlert} = useContext(AlertContext)
     const allDaysEnum = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
     const daysEnum = allDaysEnum.filter(d => {
         if (daysReserved.map(d => d.day).includes(d)) return false
@@ -24,7 +27,7 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
 
         const apariciones = daysReserved.filter((d,idx) => d.day == modifiedDay.day && idx!=idxModified ).length
         if(apariciones>0){
-            alert("La fecha ya fue utilizada") //#TODO cambiar a alerta nueva
+            openAlert(`La fecha ${modifiedDay.day} ya fue utilizada`,"error","center","bottom",5000)
             return
         }
         setDaysReserved(daysReserved.map((dayReserved, idx) => {
@@ -128,7 +131,9 @@ function DayInputSection({ daysReserved, setDaysReserved, information }) {
                 <button type="button" className={styles.add_btn} onClick={(e) => addDay(e)} disabled={daysReserved.length >= 7 && !(information.tipo_reserva.toLowerCase() == "esporadica")}>AGREGAR DÍA</button>
                 <input type="submit" value="Seleccionar Aulas" className={styles.sumbit_btn}></input>
             </div>
+            { message.open && <Alert severity={message.severity} text={message.text} positionX={message.positionX} positionY={message.positionY} onClose={closeAlert} autoCloseDuration={message.autoCloseDuration}/>}
         </div>
+        
     )
 }
 

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import validatePassword from "../../utils/passwordValidation"
-
+import Alert from "../general/Alert"
+import { AlertContext } from "../../hooks/userHooks/AlertContext";
+import { useContext } from "react";
 import styles from "../../styles/adminStyles/modifyBedelPopUp.module.css"
 
 function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) {
@@ -12,7 +14,7 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
     const [turno, setTurno] = useState(bedelData.turno)
     const [contraseña, setContraseña] = useState("")
     const [contraseñaConfirmacion, setContraseñaConfirmacion] = useState("")
-
+    const {message, closeAlert, openAlert} = useContext(AlertContext)
     const packModifiedData = () => {
         return {
             apellido: apellido,
@@ -28,8 +30,7 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
         if(contraseña || contraseñaConfirmacion){
             const validation = validatePassword(contraseña, contraseñaConfirmacion)
             if(!validation.isValid) {
-                alert(validation.error)
-                console.log(validation.error)
+                openAlert(validation.error,"error","center","bottom",5000)
                 return
             }
         }
@@ -89,6 +90,7 @@ function ModifyBedelPopUp({getAlterBedelData, confirmModification, closePopUp}) 
                 </div>
                 </form>
             </div>
+            { message.open && <Alert severity={message.severity} text={message.text} positionX={message.positionX} positionY={message.positionY} onClose={closeAlert} autoCloseDuration={message.autoCloseDuration}/>}
         </div>
     )
 }
