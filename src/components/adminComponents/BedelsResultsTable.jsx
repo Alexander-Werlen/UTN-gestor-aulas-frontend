@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import DeleteBedelPopUp from "./DeleteBedelPopUp"
 import ModifyBedelPopUp from "./ModifyBedelPopUp"
 import styles from "../../styles/adminStyles/bedelsResultsTable.module.css"
@@ -10,7 +10,9 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
     const [bedels, setBedels] = useState([])
     //refreshTable bedels after deletion or modification
     const [refreshTable, setRefreshTable] = useState(false)
-    
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc', ignorecase: true });
+
+
 
 
     const defaultAlterBedelData = {
@@ -49,7 +51,10 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
             }).catch(e => {
                 console.log(e)
             })
-    }, [apellidoFilter, turnoFilter, refreshTable ])
+    }, [apellidoFilter, turnoFilter, refreshTable])
+
+
+
 
 
     const confirmDeletion = (identificador) => {
@@ -101,7 +106,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                 })
                 setRefreshTable((prev) => !prev)
                 closePopUp()
-            }).catch( (e)=> {
+            }).catch((e) => {
                 let error = e.response.data.error
                 if (error.constructor === Array) error = error[0]
                 setMessage({
@@ -151,6 +156,35 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
     }
 
 
+    const sortedBedels = useMemo(() => {
+        if (!sortConfig.key) return bedels; // Si no hay clave de orden, devolver la lista original
+
+        const sorted = [...bedels].sort((a, b) => {
+            const aValue = a[sortConfig.key] || "";
+            const bValue = b[sortConfig.key] || "";
+
+            if (sortConfig.ignorecase) {
+                return sortConfig.direction === "asc"
+                    ? aValue.localeCompare(bValue, "es", { sensitivity: "base" })
+                    : bValue.localeCompare(aValue, "es", { sensitivity: "base" });
+            }
+            return sortConfig.direction === "asc"
+                ? aValue > bValue ? 1 : -1
+                : aValue < bValue ? 1 : -1;
+        });
+
+        return sorted;
+    }, [bedels, sortConfig]);
+
+    const handleSort = (key, ignorecase) => {
+        setSortConfig((prevConfig) => {
+            const isSameKey = prevConfig.key === key;
+            const newDirection = isSameKey && prevConfig.direction === 'asc' ? 'desc' : 'asc';
+            return { key, direction: newDirection, ignorecase };
+        });
+    };
+
+
 
 
     return (
@@ -161,15 +195,15 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                     <table className={styles.table}>
                         <thead>
                             <tr>
-                                <th>ACCIONES</th>
-                                <th>APELLIDO</th>
-                                <th>NOMBRE</th>
-                                <th>TURNO</th>
-                                <th>IDENTIFICADOR</th>
+                                <th className="no-click">ACCIONES</th>
+                                <th onClick={() => handleSort('apellido', true)}>APELLIDO </th>
+                                <th onClick={() => handleSort('nombre', true)}>NOMBRE</th>
+                                <th onClick={() => handleSort('turno', false)}>TURNO</th>
+                                <th onClick={() => handleSort('identificador', false)}>IDENTIFICADOR</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {bedels.map(bedel =>
+                            {sortedBedels.map(bedel =>
                                 <tr key={bedel.identificador}>
                                     <td>
                                         <button className={styles.editar_btn} onClick={() => openModifyBedelPopUp(bedel)}>Editar</button>

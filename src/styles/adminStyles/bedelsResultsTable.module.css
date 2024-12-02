@@ -16,14 +16,29 @@
     padding: 0px;
 }
 
+
 .table td , .table th {
     width: 20%;
     height: 40px;
     border: 1px solid #000000;
-
+    cursor: pointer;
     text-align: center;
     padding: 0px;
 }
+
+.table th:hover {
+    background-color: var(--primary-light);
+}
+
+.table th:first-child {
+    cursor: default; /* No se muestra como clicable */
+}
+
+.table th:first-child:hover {
+
+    background-color: var(--primary-dark);
+}
+
 
 .table th {
     background-color: var(--primary-dark);
@@ -141,4 +156,22 @@
 
 .eliminar_btn{
     color: var(--error-dark);
+}
+
+
+.arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    margin-left: 5px;
+}
+
+.arrow.asc {
+    border-bottom: 6px solid #000; /* Flecha hacia arriba */
+}
+
+.arrow.desc {
+    border-top: 6px solid #000; /* Flecha hacia abajo */
 }
