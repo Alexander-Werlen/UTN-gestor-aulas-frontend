@@ -73,7 +73,6 @@
     border: none;
     cursor: pointer;
     overflow: hidden;
-    outline: none;
     color: var(--error-main);
     font-size: large;
 }

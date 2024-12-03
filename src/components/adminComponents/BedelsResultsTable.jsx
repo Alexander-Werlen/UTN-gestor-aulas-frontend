@@ -209,7 +209,7 @@ function BedelResultsTable({ apellidoFilter, turnoFilter }) {
                                 <th onClick={() => handleSort('turno', false)}>
                                     TURNO {sortedColumn === 'turno' && (sortOrder === 'asc' ? '▲' : '▼')}
                                 </th>
-                                <th onClick={() => handleSort('identificador', false)}>
+                                <th onClick={() => handleSort('identificador', true)}>
                                     IDENTIFICADOR {sortedColumn === 'identificador' && (sortOrder === 'asc' ? '▲' : '▼')}
                                 </th>
                             </tr>

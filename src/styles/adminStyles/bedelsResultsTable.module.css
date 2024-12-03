@@ -21,13 +21,13 @@
     width: 20%;
     height: 40px;
     border: 1px solid #000000;
-    cursor: pointer;
     text-align: center;
     padding: 0px;
 }
 
 .table th:hover {
     background-color: var(--primary-light);
+    cursor: pointer;
 }
 
 .table th:first-child {
@@ -46,6 +46,11 @@
     top: 0;
     z-index: 2;
     position: sticky;
+    
+    /* Avoid text selection */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
     
 }
 

@@ -46,39 +46,31 @@
     font-size: 20px;
     cursor: pointer;
 }
+  
+.button_Section {
+  
+  width: 20rem; /* Ancho de la sección de botones */
+  display: flex;
+  gap: 2rem; /* Espacio entre los botones */
+}
 
-  
 
-  
-  .input_text:focus, .select_text:focus {
-    border: 2px solid var(--primary-light); /* Color del borde al enfocar */
-    outline: none; /* Eliminar el borde de enfoque predeterminado */
-  }
-  
-  .button_Section {
-    
-    width: 20rem; /* Ancho de la sección de botones */
-    display: flex;
-    gap: 2rem; /* Espacio entre los botones */
+.button_Buscar {
+  background-color: var(--secondary-main); /* Color de fondo del botón de buscar */
+  color: white; /* Color del texto del botón */
+}
+
+.button_Buscar:hover ,.button_Buscar:focus {
+  background-color:  var(--secondary-dark); /* Color de fondo al pasar el ratón */
   }
 
-  
-  .button_Buscar {
-    background-color: var(--secondary-main); /* Color de fondo del botón de buscar */
-    color: white; /* Color del texto del botón */
-  }
-  
-  .button_Buscar:hover ,.button_Buscar:focus {
-    background-color:  var(--secondary-dark); /* Color de fondo al pasar el ratón */
-    }
-  
-  .button_Limpiar {
-    background-color: var(--gray-main); /* Color de fondo del botón de limpiar */
-    color: white; /* Color del texto del botón */
-    border: 0; /* Eliminar el borde del botón */
-  } 
-  
-  .button_Limpiar:hover  ,.button_Limpiar:focus{
-    background-color: var(--gray-dark); /* Color de fondo al pasar el ratón */
-    color: white; /* Color del texto al pasar el ratón */
-  }
+.button_Limpiar {
+  background-color: var(--gray-main); /* Color de fondo del botón de limpiar */
+  color: white; /* Color del texto del botón */
+  border: 0; /* Eliminar el borde del botón */
+} 
+
+.button_Limpiar:hover  ,.button_Limpiar:focus{
+  background-color: var(--gray-dark); /* Color de fondo al pasar el ratón */
+  color: white; /* Color del texto al pasar el ratón */
+}
